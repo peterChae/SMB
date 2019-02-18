@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="sales">
+	<!-- Sales List -->
+ 	<select id="getSalesList"  resultType="smb.common.dto.DtoSales">
+		select   B.WORK_ID
+		        ,B.WORK_NM
+		        ,C.CMPY_ID
+		        ,C.CMPY_NM
+		        ,D.BRAND_ID
+		        ,D.BRAND_NM
+		        ,A.AMT_YEAR
+		        ,A.AMT_MONTH
+		        ,A.SALES_MONEY
+		        ,A.AMT_MONEY
+		        ,A.AMT_KAKAO_MONEY
+		        ,A.NET_SALES_MONEY
+		        ,A.REFUND_MONEY
+		        ,A.PERFORM_COUNT
+		from     TB_SMB_SALES A
+		        ,TB_SMB_WORK B
+		        ,TB_SMB_COMPANY C
+		        ,TB_SMB_BRAND D
+		where    A.WORK_ID = B.WORK_ID
+		and      A.CMPY_ID = C.CMPY_ID
+		and      A.BRAND_ID = D.BRAND_ID
+		order by A.AMT_YEAR desc, A.AMT_MONTH desc
+ 	</select>
+</mapper>

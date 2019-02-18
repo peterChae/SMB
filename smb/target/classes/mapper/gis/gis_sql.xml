@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="gis">
+	<!-- Delivery Count -->
+	<select id="deliveryCount" resultType="String">
+		select count(*) as COUNT 
+		from   TB_DELIVERYSTORE 
+		where  flag='Y'
+	</select>
+	
+	<!-- Branch Count -->
+ 	<select id="branchCount" resultType="String" parameterType="String"> 	
+ 		select count(*) as COUNT 
+ 		from   TB_BRANCH
+ 		where  flag='Y'
+ 		and    BRAND_NAME = #{brand} 	
+ 	</select>
+ 	
+ 	<select id="getDeliveryStoreList"  resultType="smb.common.dto.DtoDeliveryStore">
+ 		select   STORE_ID
+		        ,isnull(STORE_NAME, 0) as STORE_NAME
+		        ,isnull(FULL_ADDR, 0) as FULL_ADDR
+		        ,isnull(SI, 0) as SI
+		        ,isnull(GU, 0) as GU
+		        ,isnull(DONG, 0) as DONG
+		        ,isnull(LAT, 0) as LAT											
+		        ,isnull(LNG, 0) as LNG
+		        ,isnull(FLAG, 0) as FLAG							
+		from  	 TB_DELIVERYSTORE with(nolock)
+		where    FLAG = 'Y'
+		order by STORE_ID
+ 	</select>
+ 	
+ 	<select id="getBranchList" resultType="smb.common.dto.DtoBranch" parameterType="String">
+ 		select   BRAND_NAME
+ 		        ,BRANCH_ID
+ 		        ,BRANCH_NAME
+ 		        ,FULL_ADDR
+ 		        ,LAT
+ 		        ,LNG
+ 		from     TB_BRANCH
+ 		where    FLAG='Y'
+		and      BRAND_NAME = #{brand}
+ 		order by BRANCH_ID
+ 	</select>
+ 	
+ 	<select id="getMatchingList" resultType="smb.common.dto.DtoMatchingList" parameterType="HashMap">
+		<![CDATA[
+		select   A.BRANCH_ID             
+		        ,A.BRANCH_NAME           
+		        ,B.FULL_ADDR AS FULL_ADDR       
+		        ,COUNT(*) as MATCHING_COUNT              
+		from     TB_MATCHING_LIST A
+		        ,TB_BRANCH B      
+		where    A.BRANCH_ID = B.BRANCH_ID
+		and      cast(A.DISTANCE as int) < #{distance}
+		and      A.BRAND_NAME = #{brand}
+		group by A.BRANCH_ID, A.BRANCH_NAME, B.FULL_ADDR
+		]]>		     
+	</select>
+ 	
+ 	<select id="getUnMatchingList" resultType="smb.common.dto.DtoMatchingList" parameterType="HashMap">
+		<![CDATA[
+		select  A.BRANCH_ID           
+		       ,A.BRANCH_NAME         
+		       ,A.FULL_ADDR           
+		from    TB_BRANCH A left outer join
+		        (select   BRANCH_ID from TB_MATCHING_LIST
+		         where    cast(DISTANCE as int) < #{distance}
+		         group by BRANCH_ID) B
+		on      A.BRANCH_ID = B.BRANCH_ID
+		where   A.BRAND_NAME = #{brand}
+		and     A.FLAG = 'Y'
+		and     B.BRANCH_ID is null
+		]]>		     
+	</select>
+	
+	<select id ="getMatchingCount" resultType="String" parameterType="HashMap">
+		<![CDATA[
+		select count(*) as MATCHING_COUNT
+		from   (select   BRANCH_ID            
+		        from     TB_MATCHING_LIST     
+		        where    cast(DISTANCE as int) < #{distance}
+		        and      BRAND_NAME = #{brand}      
+		        group by BRANCH_ID            
+		       ) TB_MATCHING_LIST
+		]]>		     
+	</select>
+	
+	<select id ="getUnMatchingCount" resultType="String" parameterType="HashMap">
+		<![CDATA[
+		select  count(*) as MATCHING_COUNT           
+		from    TB_BRANCH A left outer join
+		        (select   BRANCH_ID from TB_MATCHING_LIST
+		         where    cast(DISTANCE as int) < #{distance}
+		         group by BRANCH_ID) B
+		on      A.BRANCH_ID = B.BRANCH_ID
+		where   A.BRAND_NAME = #{brand}
+		and     A.FLAG = 'Y'
+		and     B.BRANCH_ID is null
+		]]>		     
+	</select>
+	
+	<select id="getAreaCountList" resultType="smb.common.dto.DtoDeliveryStore">
+		select   SI
+		        ,count(*) as COUNT
+		from     TB_DELIVERYSTORE
+		where    FLAG = 'Y'
+		group by SI
+ 	</select>
+
+	<select id="getTargetBranchList" resultType="smb.common.dto.DtoBranch" parameterType="String">
+		select  BRAND_NAME         
+		       ,BRANCH_NAME         
+		       ,FULL_ADDR           
+		from    TB_BRANCH_TARGET
+		where   BRAND_NAME = #{brand}
+	</select>
+
+	<insert id="insertBranchConvertAddr" parameterType="smb.common.dto.DtoBranch">
+		insert into TB_BRANCH_CONVERT (
+		            BRAND_NAME
+		           ,BRANCH_NAME
+		           ,FULL_ADDR
+		           ,SI
+		           ,GU
+		           ,DONG
+		           ,LAT
+		           ,LNG
+		           ,FLAG
+		) values (
+		            #{brand_name}
+		           ,#{branch_name}
+		           ,#{full_addr}
+		           ,#{si}
+		           ,#{gu}
+		           ,#{dong}
+		           ,#{lat}
+		           ,#{lng}
+		           ,#{flag}
+		)
+	</insert>
+
+	<insert id="insertMatchingData" parameterType="smb.common.dto.DtoMatchingList">
+		insert into TB_MATCHING_LIST (
+		            BRAND_NAME
+		           ,BRANCH_ID
+		           ,BRANCH_NAME
+		           ,STORE_ID
+		           ,STORE_NAME
+		           ,DISTANCE
+		) values (
+		            #{brand_name}
+		           ,#{branch_id}
+		           ,#{branch_name}
+		           ,#{store_id}
+		           ,#{store_name}
+		           ,#{distance}
+		)
+	</insert>
+</mapper>
