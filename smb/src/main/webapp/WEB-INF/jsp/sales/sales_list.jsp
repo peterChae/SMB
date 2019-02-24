@@ -84,6 +84,12 @@
 						</table>
 					</div>
 					<!-- /.box-body -->
+
+					<div align="right" class="box-footer">
+                		<button type="submit" id="fmBtnSalesReport" class="btn btn-primary">세일즈 리포트</button>
+                		<button type="submit" id="fmBtnSalesRegister" class="btn bg-maroon margin">등록화면</button>
+              		</div>
+              		<!-- /.box-footer -->
 				</div>
 				<!-- /.box -->
 			</div>
@@ -113,9 +119,13 @@
 
 <!-- page script -->
 <script>
-  $(function () {
-    $("#salesList").DataTable();
-  });
+$(function () {
+	$("#salesList").DataTable();
+});
+
+$('#fmBtnSalesReport').click(function() {window.location = "";});
+$('#fmBtnSalesRegister').click(function() {window.location = "/smb/SalesRegister.do"});  
+  
 </script>
 
 

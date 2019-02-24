@@ -80,10 +80,7 @@
 									</select>
 								</div>
 								<!-- /.form-group -->
-							</div>
-							
-							<!-- /.col -->
-							<div class="col-md-6">
+								
 								<div class="form-group">
 									<label>매출년도</label>
 									<select id="fmAmtYear" class="form-control select2" style="width: 100%;">
@@ -120,7 +117,10 @@
 									</select>
 								</div>
 								<!-- /.form-group -->
-
+							</div>
+							
+							<!-- /.col -->
+							<div class="col-md-6">
 								<div class="form-group">
 									<!-- text input -->
 									<div class="form-group">
@@ -157,9 +157,9 @@
 					</div>
 					<!-- /.box-body -->
 					
-					<div class="box-footer">
-                		<button type="submit" id="fmBtnCancel" class="btn btn-default">취소</button>
-                		<button type="submit" id="fmBtnInsert" class="btn btn-info pull-right">저장</button>
+					<div align="right" class="box-footer">
+                		<button type="submit" id="fmBtnCancel" class="btn btn-default">매출리스트 화면으로</button>
+                		<button type="submit" id="fmBtnInsert" class="btn btn-info">데이터 저장</button>
               		</div>
               		<!-- /.box-footer -->
 					
@@ -285,8 +285,6 @@ $('#fmBtnInsert').click(function() {
 			}
 		}
 	}); 
-
-	
 });
 
 /**
