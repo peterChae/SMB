@@ -43,4 +43,9 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.getBrandList();
 	}
 
+	@Override
+	public Integer insertSalesData(DtoSales dto_sales) throws Exception {
+		return salesDao.insertSalesData(dto_sales);
+	}
+	
 }

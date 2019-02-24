@@ -13,4 +13,6 @@ public interface SalesService {
 	public List<DtoWork> getWorkList() throws Exception;
 	public List<DtoCompany> getCmpyList() throws Exception;
 	public List<DtoBrand> getBrandList() throws Exception;
+
+	public Integer insertSalesData(DtoSales dto_sales) throws Exception;
 }

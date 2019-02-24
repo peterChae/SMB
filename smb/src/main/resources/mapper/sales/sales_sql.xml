@@ -51,4 +51,42 @@
 		from     TB_SMB_BRAND
 		order by BRAND_ID
  	</select>
+ 	
+ 	<!-- Brand List -->
+	<insert id="insertSalesData" parameterType="smb.sales.dto.DtoSales">
+		insert into TB_SMB_SALES (
+		            work_id
+		           ,cmpy_id
+		           ,brand_id
+		           ,amt_year
+		           ,amt_month
+		           ,amt_term
+		           ,sales_money
+		           ,amt_money
+		           ,amt_kakao_money
+		           ,net_sales_money
+		           ,refund_money
+		           ,perform_count
+		           ,reg_id
+		           ,reg_date
+		           ,reg_time
+		) values (
+		            #{work_id}
+		           ,#{cmpy_id}
+		           ,#{brand_id}
+		           ,#{amt_year}
+		           ,#{amt_month}
+		           ,#{amt_term}
+		           ,#{sales_money}
+		           ,#{amt_money}
+		           ,#{amt_kakao_money}
+		           ,#{net_sales_money}
+		           ,#{refund_money}
+		           ,#{perform_count}
+		           ,'SYSTEM'
+		           ,replace(convert(varchar(10), getDate(), 120), '-', '')
+		           ,replace(convert(varchar(8), getDate(), 108), ':', '')
+		)
+	</insert>
+ 	
 </mapper>

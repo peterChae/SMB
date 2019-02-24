@@ -189,7 +189,6 @@
 			url : '/smb/gis/getDeliveryArea.do',
 			contentType : 'application/json; charset=UTF-8',
 			error : function(ajaxResult) {
-				console.log(ajaxResult);
 				alert('에러: 데이터 송수신에 문제가 있습니다.');
 			},
 			success : function(ajaxResult) {

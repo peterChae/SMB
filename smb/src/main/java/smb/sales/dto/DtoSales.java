@@ -11,13 +11,21 @@ public class DtoSales {
 	private String		brand_nm;
 	private String		amt_year;
 	private String		amt_month;
+	private String		amt_term;
 	private BigDecimal	sales_money;
 	private BigDecimal	amt_money;
 	private BigDecimal	amt_kakao_money;
 	private BigDecimal	net_sales_money;
 	private BigDecimal	refund_money;
 	private Integer		perform_count;
+
 	
+	public String getAmt_term() {
+		return amt_term;
+	}
+	public void setAmt_term(String amt_term) {
+		this.amt_term = amt_term;
+	}
 	public String getWork_id() {
 		return work_id;
 	}

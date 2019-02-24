@@ -32,4 +32,8 @@ public class SalesDao extends AbstractDao  {
 	public List<DtoBrand> getBrandList() throws Exception {
 		return (List<DtoBrand>)selectList("sales.getBrandList");
 	}
+
+	public Integer insertSalesData(DtoSales dto_sales) throws Exception {
+		return (Integer)insert("sales.insertSalesData", dto_sales);
+	}
 }
