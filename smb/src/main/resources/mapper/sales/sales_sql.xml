@@ -3,7 +3,7 @@
  
 <mapper namespace="sales">
 	<!-- Sales List -->
- 	<select id="getSalesList"  resultType="smb.common.dto.DtoSales">
+ 	<select id="getSalesList"  resultType="smb.sales.dto.DtoSales">
 		select   B.WORK_ID
 		        ,B.WORK_NM
 		        ,C.CMPY_ID
@@ -26,5 +26,29 @@
 		and      A.CMPY_ID = C.CMPY_ID
 		and      A.BRAND_ID = D.BRAND_ID
 		order by A.AMT_YEAR desc, A.AMT_MONTH desc
+ 	</select>
+ 	
+ 	<!-- Work List -->
+ 	<select id="getWorkList"  resultType="smb.sales.dto.DtoWork">
+		select   WORK_ID
+		        ,WORK_NM
+		from     TB_SMB_WORK
+		order by WORK_ID
+ 	</select>
+ 	
+ 	<!-- Company List -->
+ 	<select id="getCmpyList"  resultType="smb.sales.dto.DtoCompany">
+		select   CMPY_ID
+		        ,CMPY_NM
+		from     TB_SMB_COMPANY
+		order by CMPY_ID
+ 	</select>
+ 	
+ 	<!-- Brand List -->
+ 	<select id="getBrandList"  resultType="smb.sales.dto.DtoBrand">
+		select   BRAND_ID
+		        ,BRAND_NM
+		from     TB_SMB_BRAND
+		order by BRAND_ID
  	</select>
 </mapper>

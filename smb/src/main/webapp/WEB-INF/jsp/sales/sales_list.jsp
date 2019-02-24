@@ -31,6 +31,19 @@
 
 <!-- Content Wrapper -->
 <div class="content-wrapper">
+
+	<section class="content-header">
+		<h1>
+			매출 리스트
+			<small>List</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#">매출관리</a></li>
+			<li class="active">매출리스트</li>
+		</ol>
+	</section>
+
 	<!-- Main content -->	
 	<section class="content">
 		<div class="row">

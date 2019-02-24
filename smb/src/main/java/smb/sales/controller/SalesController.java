@@ -36,4 +36,25 @@ public class SalesController {
 		// -----------------------------------------------------------------------------
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "/insSales.do", method = RequestMethod.GET)
+	public ModelAndView insSales() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/sales/sales_register");
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("workList",  salesService.getWorkList());
+		mv.addObject("cmpyList",  salesService.getCmpyList());
+		mv.addObject("brandList", salesService.getBrandList());
+
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
 }

@@ -1,4 +1,4 @@
-package smb.common.dto;
+package smb.sales.dto;
 
 import java.math.BigDecimal;
 

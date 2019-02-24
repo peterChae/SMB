@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/all-skins.min.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9a749ab366ad2be358f9cc9cc135906"></script>
 	
 	<!-- Tell the browser to be responsive to screen width -->
@@ -134,10 +133,7 @@
 	<!-- /.content-wrapper -->
 
 	
-</body>
-</html>
-
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script>
 	var circles = [];
 	var markerData = [];
@@ -312,4 +308,6 @@
 	}
 </script>
 
+</body>
+</html>
 
