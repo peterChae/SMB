@@ -55,8 +55,8 @@ public class SalesController {
 	
 	
 	
-	@RequestMapping(value = "/initSales.do", method = RequestMethod.GET)
-	public ModelAndView initSales() throws Exception {
+	@RequestMapping(value = "/SalesList.do", method = RequestMethod.GET)
+	public ModelAndView SalesList() throws Exception {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
@@ -74,8 +74,8 @@ public class SalesController {
 	}
 	
 	
-	@RequestMapping(value = "/insSales.do", method = RequestMethod.GET)
-	public ModelAndView insSales() throws Exception {
+	@RequestMapping(value = "/SalesRegister.do", method = RequestMethod.GET)
+	public ModelAndView SalesRegister() throws Exception {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
@@ -95,9 +95,9 @@ public class SalesController {
 	}
 
 
-	@RequestMapping(value = "/insertSales.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
+	@RequestMapping(value = "/SalesInsert.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
 	@ResponseBody
-	public AjaxResult insertSales(@ModelAttribute DtoSales dto_sales) throws Exception {
+	public AjaxResult SalesInsert(@ModelAttribute DtoSales dto_sales) throws Exception {
 		
 		// -----------------------------------------------------------------------------
 		// New Return Object

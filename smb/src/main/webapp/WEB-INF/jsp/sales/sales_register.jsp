@@ -53,7 +53,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>진행업무</label>
-									<select id="select_work" class="form-control select2" style="width: 100%;">
+									<select id="fmWorkList" class="form-control select2" style="width: 100%;">
 									<c:forEach items="${workList}" var="row">
 										<option value="${row.work_id}">${row.work_nm}</option>
 									</c:forEach>
@@ -63,7 +63,7 @@
 								
 								<div class="form-group">
 									<label>수행업체</label>
-									<select id="select_cmpy" class="form-control select2" style="width: 100%;">
+									<select id="fmCmpyList" class="form-control select2" style="width: 100%;">
 									<c:forEach items="${cmpyList}" var="row">
 										<option value="${row.cmpy_id}">${row.cmpy_nm}</option>
 									</c:forEach>
@@ -73,7 +73,7 @@
 								
 								<div class="form-group">
 									<label>브랜드</label>
-									<select id="select_brand" class="form-control select2" style="width: 100%;">
+									<select id="fmBrandList" class="form-control select2" style="width: 100%;">
 									<c:forEach items="${brandList}" var="row">
 										<option value="${row.brand_id}">${row.brand_nm}</option>
 									</c:forEach>
@@ -86,7 +86,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>매출년도</label>
-									<select id="select_year" class="form-control select2" style="width: 100%;">
+									<select id="fmAmtYear" class="form-control select2" style="width: 100%;">
 										<option value="2018">2018년</option>
 										<option value="2019" selected="selected">2019년</option>
 									</select>
@@ -95,7 +95,7 @@
 
 								<div class="form-group">
 									<label>매출월</label>
-									<select id="select_month" class="form-control select2" style="width: 100%;">
+									<select id="fmAmtMonth" class="form-control select2" style="width: 100%;">
 										<option value="01">1월</option>
 										<option value="02">2월</option>
 										<option value="03">3월</option>
@@ -114,7 +114,7 @@
 
 								<div class="form-group">
 									<label>매출회차</label>
-									<select id="select_term" class="form-control select2" style="width: 100%;">
+									<select id="fmAmtTerm" class="form-control select2" style="width: 100%;">
 										<option value="1" selected="selected">1회차 (1 ~ 15)</option>
 										<option value="2">2회차 (15 ~ 31)</option>
 									</select>
@@ -125,27 +125,27 @@
 									<!-- text input -->
 									<div class="form-group">
 										<label>매출금액</label>
-										<input type="text" id="sales_money" class="form-control">
+										<input type="text" id="fmSalesMoney" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>매입금액</label>
-										<input type="text" id="amt_money" class="form-control">
+										<input type="text" id="fmAmtMoney" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>카카오 정산 금액</label>
-										<input type="text" id="amt_kakao_money" class="form-control">
+										<input type="text" id="fmAmtKakaoMoney" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>순매출액</label>
-										<input type="text" id="net_sales_money" class="form-control" disabled>
+										<input type="text" id="fmNetSalesMoney" class="form-control" disabled>
 									</div>
 									<div class="form-group">
 										<label>수행건수</label>
-										<input type="text" id="perform_count" class="form-control">
+										<input type="text" id="fmPerformCount" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>환불금액</label>
-										<input type="text" id="refund_money" class="form-control">
+										<input type="text" id="fmRefundMoney" class="form-control">
 									</div>
 								</div>
 								<!-- /.form-group -->
@@ -158,8 +158,8 @@
 					<!-- /.box-body -->
 					
 					<div class="box-footer">
-                		<button type="submit" id="btn_cancel" class="btn btn-default">취소</button>
-                		<button type="submit" id="btn_insert" class="btn btn-info pull-right">저장</button>
+                		<button type="submit" id="fmBtnCancel" class="btn btn-default">취소</button>
+                		<button type="submit" id="fmBtnInsert" class="btn btn-info pull-right">저장</button>
               		</div>
               		<!-- /.box-footer -->
 					
@@ -190,12 +190,12 @@
  * 금액 마스킹 처리
  */
 $(function () {
-	$("input#sales_money").mask('000,000,000,000,000', {reverse:true});
-	$("input#amt_money").mask('000,000,000,000,000', {reverse:true});
-	$("input#amt_kakao_money").mask('000,000,000,000,000', {reverse:true});
-	$("input#net_sales_money").mask('000,000,000,000,000', {reverse:true});
-	$("input#perform_count").mask('000,000,000,000,000', {reverse:true});
-	$("input#refund_money").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmSalesMoney").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmAmtMoney").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmAmtKakaoMoney").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmNetSalesMoney").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmPerformCount").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmRefundMoney").mask('000,000,000,000,000', {reverse:true});
 });
 
 /**
@@ -210,23 +210,23 @@ function removeMask(target) {
 /**
  * 순매출 구하기
  */
-$("input#sales_money").blur(function() {
-	var sales_money = $("input#sales_money").val();
-	var amt_money   = $("input#amt_money").val();
-	$("input#net_sales_money").val(removeMask(sales_money) - removeMask(amt_money));
+$("input#fmSalesMoney").blur(function() {
+	var sales_money = $("input#fmSalesMoney").val();
+	var amt_money   = $("input#fmAmtMoney").val();
+	$("input#fmNetSalesMoney").val(removeMask(sales_money) - removeMask(amt_money));
 });
-$("input#amt_money").blur(function() {
-	$("input#sales_money").blur();
+$("input#fmAmtMoney").blur(function() {
+	$("input#fmSalesMoney").blur();
 });
 
 
 /**
  * Select Box
  */
-$("#select_work").change(function() {
-	var work_id = $("#select_work option:selected").val();
+$("#fmWorkList").change(function() {
+	var work_id = $("#fmWorkList option:selected").val();
 	if(work_id == "w0001" || work_id == "w0002") {
-		$('#select_brand option[value=kakao]').attr('selected','selected');
+		$('#fmBrandList option[value=kakao]').attr('selected','selected');
 	}
 });
 
@@ -234,54 +234,54 @@ $("#select_work").change(function() {
 /**
  * 저장버튼 클릭
  */
-$('#btn_insert').click(function() {
+$('#fmBtnInsert').click(function() {
 	
 	// Invaid Check
-	if($("input#sales_money").val()=="") {
+	if($("input#fmSalesMoney").val()=="") {
 		alert('매출금액을 입력하세요');
-		$("input#sales_money").focus();
+		$("input#fmSalesMoney").focus();
 		return ;
-	} else if($("input#amt_money").val()=="") {
+	} else if($("input#fmAmtMoney").val()=="") {
 		alert('매입금액을 입력하세요');
-		$("input#amt_money").focus();
+		$("input#fmAmtMoney").focus();
 		return ;
-	} else if($("input#perform_count").val()=="") {
+	} else if($("input#fmPerformCount").val()=="") {
 		alert('수행건수를 입력하세요');
-		$("input#perform_count").focus();
+		$("input#fmPerformCount").focus();
 		return ;
-	} else if($("input#refund_money").val()=="") {
+	} else if($("input#fmRefundMoney").val()=="") {
 		alert('환불금액을 입력하세요');
-		$("input#refund_money").focus();
+		$("input#fmRefundMoney").focus();
 		return ;
 	}
 
 	// Insert Data
 	$.ajax({
 		type : 'GET',
-		data  : {work_id : $("#select_work option:selected").val(),
-				 cmpy_id : $("#select_cmpy option:selected").val(),
-				 brand_id : $("#select_brand option:selected").val(),
-				 amt_year : $("#select_year option:selected").val(),
-				 amt_month : $("#select_month option:selected").val(),
-				 amt_term : $("#select_term option:selected").val(),
-				 sales_money : removeMask($("input#sales_money").val()),
-				 amt_money : removeMask($("input#amt_money").val()),
-				 amt_kakao_money : removeMask($("input#amt_kakao_money").val()),
-				 net_sales_money : removeMask($("input#net_sales_money").val()),
-				 refund_money : removeMask($("input#refund_money").val()),
-				 perform_count : removeMask($("input#perform_count").val())
+		data  : {work_id : $("#fmWorkList option:selected").val(),
+				 cmpy_id : $("#fmCmpyList option:selected").val(),
+				 brand_id : $("#fmBrandList option:selected").val(),
+				 amt_year : $("#fmAmtYear option:selected").val(),
+				 amt_month : $("#fmAmtMonth option:selected").val(),
+				 amt_term : $("#fmAmtTerm option:selected").val(),
+				 sales_money : removeMask($("input#fmSalesMoney").val()),
+				 amt_money : removeMask($("input#fmAmtMoney").val()),
+				 amt_kakao_money : removeMask($("input#fmAmtKakaoMoney").val()),
+				 net_sales_money : removeMask($("input#fmNetSalesMoney").val()),
+				 refund_money : removeMask($("input#fmRefundMoney").val()),
+				 perform_count : removeMask($("input#fmPerformCount").val())
 				},
 		dataType: "json",
-		url : '/smb/insertSales.do',
+		url : '/smb/SalesInsert.do',
 		contentType : 'application/json; charset=UTF-8',
 		error : function(ajaxResult) {
 			alert('에러: 데이터 송수신에 문제가 있습니다.');
 		},
 		success : function(ajaxResult) {
 			if(confirm("저장되었습니다.\n추가로 입력할 데이터가 있습니까?")) {
-				window.location = "/smb/insSales.do"
+				window.location = "/smb/SalesRegister.do"
 			} else {
-				window.location = "/smb/initSales.do"
+				window.location = "/smb/SalesList.do"
 			}
 		}
 	}); 
@@ -292,8 +292,8 @@ $('#btn_insert').click(function() {
 /**
  * 취소버튼 클릭
  */
-$('#btn_cancel').click(function() {
-	window.location = "/smb/initSales.do"	
+$('#fmBtnCancel').click(function() {
+	window.location = "/smb/SalesList.do"	
 });
 
 </script>
