@@ -212,10 +212,14 @@ function removeMask(target) {
  */
 $("input#fmSalesMoney").blur(function() {
 	var sales_money = $("input#fmSalesMoney").val();
-	var amt_money   = $("input#fmAmtMoney").val();
-	$("input#fmNetSalesMoney").val(removeMask(sales_money) - removeMask(amt_money));
+	var amt_money = $("input#fmAmtMoney").val();
+	var amt_kakao_money = $("input#fmAmtKakaoMoney").val();
+	$("input#fmNetSalesMoney").val(removeMask(sales_money) - removeMask(amt_money) - removeMask(amt_kakao_money));
 });
 $("input#fmAmtMoney").blur(function() {
+	$("input#fmSalesMoney").blur();
+});
+$("input#fmAmtKakaoMoney").blur(function() {
 	$("input#fmSalesMoney").blur();
 });
 

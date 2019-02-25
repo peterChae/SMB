@@ -15,4 +15,5 @@ public interface SalesService {
 	public List<DtoBrand> getBrandList() throws Exception;
 
 	public Integer insertSalesData(DtoSales dto_sales) throws Exception;
+	public Integer deleteSalesData(String idx) throws Exception;
 }

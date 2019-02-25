@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -111,6 +112,31 @@ public class SalesController {
 		int insertCount = 0;
 		insertCount = salesService.insertSalesData(dto_sales); 
 		log.debug("insert sales data : " + insertCount);
+		
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		ajaxResult.setData(resultMap);
+		return ajaxResult;
+	}
+	
+	
+	@RequestMapping(value = "/SalesDelete.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
+	@ResponseBody
+	public AjaxResult SalesDelete(@RequestParam("idx") String idx) throws Exception {
+		
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		AjaxResult ajaxResult = new AjaxResult();
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		int deleteCount = 0;
+		deleteCount = salesService.deleteSalesData(idx); 
+		log.debug("delete sales data : " + deleteCount + "(" + idx + ")");
 		
 		// -----------------------------------------------------------------------------
 		// Return 

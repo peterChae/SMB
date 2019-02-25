@@ -48,4 +48,8 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.insertSalesData(dto_sales);
 	}
 	
+	@Override
+	public Integer deleteSalesData(String idx) throws Exception {
+		return salesDao.deleteSalesData(idx);
+	}
 }

@@ -65,6 +65,7 @@
 								<th>총매입</th>
 								<th>순매출</th>
 								<th>수행건수</th>
+								<th>삭제</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -78,6 +79,7 @@
 								<td><fmt:formatNumber value="${row.amt_money}" pattern="#,###" /></td>
 								<td><fmt:formatNumber value="${row.net_sales_money}" pattern="#,###" /></td>
 								<td><fmt:formatNumber value="${row.perform_count}" pattern="#,###" /></td>
+								<td><button type="submit" id="fmBtnDelete" class="btn btn-primary" onclick="javascript:deleteData('${row.idx}')">DEL</button></td>
 							</tr>  
 							</c:forEach>
 							</tbody>
@@ -125,7 +127,29 @@ $(function () {
 
 $('#fmBtnSalesReport').click(function() {window.location = "";});
 $('#fmBtnSalesRegister').click(function() {window.location = "/smb/SalesRegister.do"});  
-  
+
+function deleteData(idx) {
+	
+	if(!confirm("진짜 삭제 할래??")) {
+		return;
+	}
+	
+	// Delete Data
+	$.ajax({
+		type : 'GET',
+		data  : {idx : idx},
+		dataType: "json",
+		url : '/smb/SalesDelete.do',
+		contentType : 'application/json; charset=UTF-8',
+		error : function(ajaxResult) {
+			alert('에러: 데이터 송수신에 문제가 있습니다.');
+		},
+		success : function(ajaxResult) {
+			alert('삭제 ㅇㅋ');
+			window.location = "/smb/SalesList.do"
+		}
+	});
+}
 </script>
 
 

@@ -4,7 +4,8 @@
 <mapper namespace="sales">
 	<!-- Sales List -->
  	<select id="getSalesList"  resultType="smb.sales.dto.DtoSales">
-		select   B.WORK_ID
+		select   A.IDX
+		        ,B.WORK_ID
 		        ,B.WORK_NM
 		        ,C.CMPY_ID
 		        ,C.CMPY_NM
@@ -52,7 +53,7 @@
 		order by BRAND_ID
  	</select>
  	
- 	<!-- Brand List -->
+ 	<!-- Insert Sales Data -->
 	<insert id="insertSalesData" parameterType="smb.sales.dto.DtoSales">
 		insert into TB_SMB_SALES (
 		            work_id
@@ -89,4 +90,10 @@
 		)
 	</insert>
  	
+ 	
+ 	<!-- Insert Sales Data -->
+	<delete id="deleteSalesData" parameterType="String">
+		delete from TB_SMB_SALES where idx = #{idx}
+	</delete>
+ 	 	
 </mapper>

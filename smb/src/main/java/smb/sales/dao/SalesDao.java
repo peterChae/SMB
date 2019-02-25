@@ -36,4 +36,8 @@ public class SalesDao extends AbstractDao  {
 	public Integer insertSalesData(DtoSales dto_sales) throws Exception {
 		return (Integer)insert("sales.insertSalesData", dto_sales);
 	}
+
+	public Integer deleteSalesData(String idx) throws Exception {
+		return (Integer)delete("sales.deleteSalesData", idx);
+	}
 }

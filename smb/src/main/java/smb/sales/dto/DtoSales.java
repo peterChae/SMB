@@ -3,6 +3,7 @@ package smb.sales.dto;
 import java.math.BigDecimal;
 
 public class DtoSales {
+	private String      idx;
 	private String		work_id;
 	private String		work_nm;
 	private String		cmpy_id;
@@ -20,6 +21,12 @@ public class DtoSales {
 	private Integer		perform_count;
 
 	
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
+	}
 	public String getAmt_term() {
 		return amt_term;
 	}
