@@ -23,14 +23,17 @@ public class GisDao extends AbstractDao {
 		return (String)selectOne("gis.branchCount", brand);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoDeliveryStore> getDeliveryStoreList() throws Exception {
 		return (List<DtoDeliveryStore>)selectList("gis.getDeliveryStoreList");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoBranch> getBranchList(String brand) throws Exception {
 		return selectList("gis.getBranchList", brand);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoMatchingList> getMatchingList(String distance, String brand) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("distance", distance);
@@ -39,6 +42,7 @@ public class GisDao extends AbstractDao {
 		return selectList("gis.getMatchingList", map);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoMatchingList> getUnMatchingList(String distance, String brand) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("distance", distance);
@@ -63,10 +67,12 @@ public class GisDao extends AbstractDao {
 		return (String)selectOne("gis.getUnMatchingCount", map);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoDeliveryStore> getAreaCountList() throws Exception {
 		return selectList("gis.getAreaCountList");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoBranch> getTargetBranchList(String brand) throws Exception {
 		return selectList("gis.getTargetBranchList", brand);
 	}

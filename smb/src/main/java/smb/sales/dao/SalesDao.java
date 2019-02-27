@@ -17,6 +17,7 @@ public class SalesDao extends AbstractDao  {
 	
 	Logger log = LoggerFactory.getLogger(SalesDao.class);
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoSales> getSalesList() throws Exception {
 		return (List<DtoSales>)selectList("sales.getSalesList");
 	}
@@ -25,14 +26,17 @@ public class SalesDao extends AbstractDao  {
 		return (DtoSales)selectOne("sales.getSalesData", idx);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<DtoWork> getWorkList() throws Exception {
 		return (List<DtoWork>)selectList("sales.getWorkList");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoCompany> getCmpyList() throws Exception {
 		return (List<DtoCompany>)selectList("sales.getCmpyList");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<DtoBrand> getBrandList() throws Exception {
 		return (List<DtoBrand>)selectList("sales.getBrandList");
 	}

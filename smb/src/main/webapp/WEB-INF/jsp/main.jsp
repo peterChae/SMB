@@ -71,7 +71,7 @@
 					<!-- small box -->
 					<div class="small-box bg-yellow">
 						<div class="inner">
-							<h3><span id="countMatchingBranch" /></h3>
+							<h3><span id="countMatchingBranch"></span></h3>
 							<p>매칭 지점수</p>
 						</div>
 						<div class="icon">
@@ -85,7 +85,7 @@
 					<!-- small box -->
 					<div class="small-box bg-red">
 						<div class="inner">
-							<h3><span id="countUnMatchingBranch" /></h3>
+							<h3><span id="countUnMatchingBranch"></span></h3>
 							<p>비매칭 지점수</p>
 						</div>
 						<div class="icon">

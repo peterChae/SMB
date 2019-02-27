@@ -128,7 +128,7 @@ $(function () {
 	$("#salesList").DataTable();
 });
 
-$('#fmBtnSalesReport').click(function() {window.location = "";});
+$('#fmBtnSalesReport').click(function() {window.location = "/smb/SalesReport.do?amt_year=2019";});
 $('#fmBtnSalesInsert').click(function() {window.location = "/smb/SalesInsertForm.do"});  
 
 

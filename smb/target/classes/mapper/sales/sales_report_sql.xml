@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="sales_report">
+
+	<!-- Sales List -->
+ 	<select id="getSalesReport"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   'total' as work_id
+		        ,'합계' as work_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales
+		         where    amt_year = #{amt_year}
+		         group by amt_year
+		                 ,amt_month
+		         ) A
+		union
+		select   work_id
+		        ,work_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   b.work_id
+		                 ,b.work_nm
+		                 ,amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales a
+		                 ,tb_smb_work b
+		         where    a.work_id = b.work_id
+		         and      a.amt_year = #{amt_year}
+		         group by b.work_id
+		                 ,b.work_nm
+		                 ,amt_year
+		                 ,amt_month
+		         ) A
+		group by work_id
+		        ,work_nm
+		order by work_id
+ 	</select>
+ 	
+ 	<!-- Sales Company List -->
+ 	<select id="getSalesReport_Company"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   'total' as cmpy_id
+		        ,'합계' as cmpy_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales
+		         where    amt_year = '2019'
+		         group by amt_year
+		                 ,amt_month
+		         ) A
+		union all
+		select   cmpy_id
+		        ,cmpy_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   b.cmpy_id
+		                 ,b.cmpy_nm
+		                 ,amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales a
+		                 ,tb_smb_company b
+		         where    a.cmpy_id = b.cmpy_id
+		         and      a.amt_year = '2019'
+		         group by b.cmpy_id
+		                 ,b.cmpy_nm
+		                 ,amt_year
+		                 ,amt_month
+		         ) A
+		group by cmpy_id
+		        ,cmpy_nm
+ 	</select>
+ 	
+ 	<!-- Sales Brand List -->
+ 	<select id="getSalesReport_Brand"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   'total' as brand_id
+		        ,'합계' as brand_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales
+		         where    amt_year = '2019'
+		         group by amt_year
+		                 ,amt_month
+		         ) A
+		union all
+		select   brand_id
+		        ,brand_nm
+		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    (select   b.brand_id
+		                 ,b.brand_nm
+		                 ,amt_year
+		                 ,amt_month
+		                 ,sum(net_sales_money) as net_sales_money
+		         from     tb_smb_sales a
+		                 ,tb_smb_brand b
+		         where    a.brand_id = b.brand_id
+		         and      a.amt_year = '2019'
+		         group by b.brand_id
+		                 ,b.brand_nm
+		                 ,amt_year
+		                 ,amt_month
+		         ) A
+		group by brand_id
+		        ,brand_nm
+ 	</select> 	
+ 	 	
+</mapper>
