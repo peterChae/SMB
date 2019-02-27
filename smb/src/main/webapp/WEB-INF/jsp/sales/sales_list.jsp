@@ -79,7 +79,10 @@
 								<td><fmt:formatNumber value="${row.amt_money}" pattern="#,###" /></td>
 								<td><fmt:formatNumber value="${row.net_sales_money}" pattern="#,###" /></td>
 								<td><fmt:formatNumber value="${row.perform_count}" pattern="#,###" /></td>
-								<td><button type="submit" id="fmBtnDelete" class="btn btn-primary" onclick="javascript:deleteData('${row.idx}')">DEL</button></td>
+								<td>
+									<button type="submit" id="fmBtnUpdate" class="btn btn-primary" onclick="javascript:updateData('${row.idx}')">U</button>
+									<button type="submit" id="fmBtnDelete" class="btn btn-primary" onclick="javascript:deleteData('${row.idx}')">D</button>
+								</td>
 							</tr>  
 							</c:forEach>
 							</tbody>
@@ -89,7 +92,7 @@
 
 					<div align="right" class="box-footer">
                 		<button type="submit" id="fmBtnSalesReport" class="btn btn-primary">세일즈 리포트</button>
-                		<button type="submit" id="fmBtnSalesRegister" class="btn bg-maroon margin">등록화면</button>
+                		<button type="submit" id="fmBtnSalesInsert" class="btn bg-maroon margin">등록화면</button>
               		</div>
               		<!-- /.box-footer -->
 				</div>
@@ -126,8 +129,19 @@ $(function () {
 });
 
 $('#fmBtnSalesReport').click(function() {window.location = "";});
-$('#fmBtnSalesRegister').click(function() {window.location = "/smb/SalesRegister.do"});  
+$('#fmBtnSalesInsert').click(function() {window.location = "/smb/SalesInsertForm.do"});  
 
+
+/**
+ * 데이터 수정
+ */
+function updateData(idx) {
+	window.location = "/smb/SalesUpdateForm.do?idx=" + idx;	
+}
+
+/**
+ * 데이터 삭제
+ */
 function deleteData(idx) {
 	
 	if(!confirm("진짜 삭제 할래??")) {

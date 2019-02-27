@@ -20,7 +20,11 @@ public class SalesDao extends AbstractDao  {
 	public List<DtoSales> getSalesList() throws Exception {
 		return (List<DtoSales>)selectList("sales.getSalesList");
 	}
-	
+
+	public DtoSales getSalesData(String idx) throws Exception {
+		return (DtoSales)selectOne("sales.getSalesData", idx);
+	}
+
 	public List<DtoWork> getWorkList() throws Exception {
 		return (List<DtoWork>)selectList("sales.getWorkList");
 	}
@@ -37,7 +41,12 @@ public class SalesDao extends AbstractDao  {
 		return (Integer)insert("sales.insertSalesData", dto_sales);
 	}
 
+	public Integer updateSalesData(DtoSales dto_sales) throws Exception {
+		return (Integer)update("sales.updateSalesData", dto_sales);
+	}
+
 	public Integer deleteSalesData(String idx) throws Exception {
 		return (Integer)delete("sales.deleteSalesData", idx);
 	}
+	
 }

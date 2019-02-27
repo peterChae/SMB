@@ -18,6 +18,7 @@ public class DtoSales {
 	private BigDecimal	amt_kakao_money;
 	private BigDecimal	net_sales_money;
 	private BigDecimal	refund_money;
+	private Integer		target_count;
 	private Integer		perform_count;
 
 	
@@ -82,34 +83,40 @@ public class DtoSales {
 		this.amt_month = amt_month;
 	}
 	public BigDecimal getSales_money() {
-		return sales_money;
+		return sales_money.setScale(0);
 	}
 	public void setSales_money(BigDecimal sales_money) {
 		this.sales_money = sales_money;
 	}
 	public BigDecimal getAmt_money() {
-		return amt_money;
+		return amt_money.setScale(0);
 	}
 	public void setAmt_money(BigDecimal amt_money) {
 		this.amt_money = amt_money;
 	}
 	public BigDecimal getAmt_kakao_money() {
-		return amt_kakao_money;
+		return amt_kakao_money.setScale(0);
 	}
 	public void setAmt_kakao_money(BigDecimal amt_kakao_money) {
 		this.amt_kakao_money = amt_kakao_money;
 	}
 	public BigDecimal getNet_sales_money() {
-		return net_sales_money;
+		return net_sales_money.setScale(0);
 	}
 	public void setNet_sales_money(BigDecimal net_sales_money) {
 		this.net_sales_money = net_sales_money;
 	}
 	public BigDecimal getRefund_money() {
-		return refund_money;
+		return refund_money.setScale(0);
 	}
 	public void setRefund_money(BigDecimal refund_money) {
 		this.refund_money = refund_money;
+	}
+	public Integer getTarget_count() {
+		return target_count;
+	}
+	public void setTarget_count(Integer target_count) {
+		this.target_count = target_count;
 	}
 	public Integer getPerform_count() {
 		return perform_count;

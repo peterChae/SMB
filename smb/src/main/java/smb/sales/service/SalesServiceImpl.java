@@ -29,6 +29,11 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
+	public DtoSales getSalesData(String idx) throws Exception {
+		return salesDao.getSalesData(idx);
+	}
+
+	@Override
 	public List<DtoWork> getWorkList() throws Exception {
 		return salesDao.getWorkList();
 	}
@@ -49,7 +54,13 @@ public class SalesServiceImpl implements SalesService {
 	}
 	
 	@Override
+	public Integer updateSalesData(DtoSales dto_sales) throws Exception {
+		return salesDao.updateSalesData(dto_sales);
+	}
+
+	@Override
 	public Integer deleteSalesData(String idx) throws Exception {
 		return salesDao.deleteSalesData(idx);
 	}
+
 }

@@ -75,12 +75,12 @@ public class SalesController {
 	}
 	
 	
-	@RequestMapping(value = "/SalesRegister.do", method = RequestMethod.GET)
-	public ModelAndView SalesRegister() throws Exception {
+	@RequestMapping(value = "/SalesInsertForm.do", method = RequestMethod.GET)
+	public ModelAndView SalesInsertForm() throws Exception {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/sales/sales_register");
+		ModelAndView mv = new ModelAndView("/sales/sales_insert");
 		
 		// -----------------------------------------------------------------------------
 		// Return Object Data Setting
@@ -94,12 +94,33 @@ public class SalesController {
 		// -----------------------------------------------------------------------------
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "/SalesUpdateForm.do", method = RequestMethod.GET)
+	public ModelAndView SalesUpdateForm(@RequestParam("idx") String idx) throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/sales/sales_update");
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("workList",  salesService.getWorkList());
+		mv.addObject("cmpyList",  salesService.getCmpyList());
+		mv.addObject("brandList", salesService.getBrandList());
+		mv.addObject("salesData", salesService.getSalesData(idx));
+		
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
 
 
 	@RequestMapping(value = "/SalesInsert.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
 	@ResponseBody
 	public AjaxResult SalesInsert(@ModelAttribute DtoSales dto_sales) throws Exception {
-		
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
@@ -112,6 +133,30 @@ public class SalesController {
 		int insertCount = 0;
 		insertCount = salesService.insertSalesData(dto_sales); 
 		log.debug("insert sales data : " + insertCount);
+		
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		ajaxResult.setData(resultMap);
+		return ajaxResult;
+	}
+	
+	
+	@RequestMapping(value = "/SalesUpdate.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
+	@ResponseBody
+	public AjaxResult SalesUpdate(@ModelAttribute DtoSales dto_sales) throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		AjaxResult ajaxResult = new AjaxResult();
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		int updateCount = 0;
+		updateCount = salesService.updateSalesData(dto_sales); 
+		log.debug("update sales data : " + updateCount);
 		
 		// -----------------------------------------------------------------------------
 		// Return 

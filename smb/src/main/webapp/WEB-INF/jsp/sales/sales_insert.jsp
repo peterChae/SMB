@@ -33,7 +33,7 @@
 	<section class="content-header">
 		<h1>
 			매출 등록
-			<small>Register</small>
+			<small>Insert</small>
 		</h1>
 	</section>
 
@@ -43,7 +43,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">SMB Sales Register</h3>
+						<h3 class="box-title">SMB Sales Insert</h3>
 					</div>
 					<!-- /.box-header -->
 	
@@ -140,6 +140,10 @@
 										<input type="text" id="fmNetSalesMoney" class="form-control" disabled>
 									</div>
 									<div class="form-group">
+										<label>대상건수</label>
+										<input type="text" id="fmTargetCount" class="form-control">
+									</div>
+									<div class="form-group">
 										<label>수행건수</label>
 										<input type="text" id="fmPerformCount" class="form-control">
 									</div>
@@ -194,6 +198,7 @@ $(function () {
 	$("input#fmAmtMoney").mask('000,000,000,000,000', {reverse:true});
 	$("input#fmAmtKakaoMoney").mask('000,000,000,000,000', {reverse:true});
 	$("input#fmNetSalesMoney").mask('000,000,000,000,000', {reverse:true});
+	$("input#fmTargetCount").mask('000,000,000,000,000', {reverse:true});
 	$("input#fmPerformCount").mask('000,000,000,000,000', {reverse:true});
 	$("input#fmRefundMoney").mask('000,000,000,000,000', {reverse:true});
 });
@@ -202,7 +207,7 @@ $(function () {
  * 금액 마스킹 제거
  */
 function removeMask(target) {
-	if(target == null) return 0;
+	if(target == null || target == "") return 0;
 	else return target.replace(/,/gi, '');
 }
 
@@ -239,7 +244,6 @@ $("#fmWorkList").change(function() {
  * 저장버튼 클릭
  */
 $('#fmBtnInsert').click(function() {
-	
 	// Invaid Check
 	if($("input#fmSalesMoney").val()=="") {
 		alert('매출금액을 입력하세요');
@@ -258,7 +262,8 @@ $('#fmBtnInsert').click(function() {
 		$("input#fmRefundMoney").focus();
 		return ;
 	}
-
+	
+	
 	// Insert Data
 	$.ajax({
 		type : 'GET',
@@ -273,6 +278,7 @@ $('#fmBtnInsert').click(function() {
 				 amt_kakao_money : removeMask($("input#fmAmtKakaoMoney").val()),
 				 net_sales_money : removeMask($("input#fmNetSalesMoney").val()),
 				 refund_money : removeMask($("input#fmRefundMoney").val()),
+				 target_count : removeMask($("input#fmTargetCount").val()),
 				 perform_count : removeMask($("input#fmPerformCount").val())
 				},
 		dataType: "json",

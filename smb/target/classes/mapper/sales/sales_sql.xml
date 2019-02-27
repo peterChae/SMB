@@ -13,11 +13,13 @@
 		        ,D.BRAND_NM
 		        ,A.AMT_YEAR
 		        ,A.AMT_MONTH
+		        ,A.AMT_TERM
 		        ,A.SALES_MONEY
 		        ,A.AMT_MONEY
 		        ,A.AMT_KAKAO_MONEY
 		        ,A.NET_SALES_MONEY
 		        ,A.REFUND_MONEY
+		        ,A.TARGET_COUNT
 		        ,A.PERFORM_COUNT
 		from     TB_SMB_SALES A
 		        ,TB_SMB_WORK B
@@ -29,6 +31,35 @@
 		order by A.AMT_YEAR desc, A.AMT_MONTH desc
  	</select>
  	
+	<!-- Sales Data -->
+ 	<select id="getSalesData" resultType="smb.sales.dto.DtoSales" parameterType="String">
+		select   A.IDX
+		        ,B.WORK_ID
+		        ,B.WORK_NM
+		        ,C.CMPY_ID
+		        ,C.CMPY_NM
+		        ,D.BRAND_ID
+		        ,D.BRAND_NM
+		        ,A.AMT_YEAR
+		        ,A.AMT_MONTH
+		        ,A.AMT_TERM
+		        ,A.SALES_MONEY
+		        ,A.AMT_MONEY
+		        ,A.AMT_KAKAO_MONEY
+		        ,A.NET_SALES_MONEY
+		        ,A.REFUND_MONEY
+		        ,A.TARGET_COUNT
+		        ,A.PERFORM_COUNT
+		from     TB_SMB_SALES A
+		        ,TB_SMB_WORK B
+		        ,TB_SMB_COMPANY C
+		        ,TB_SMB_BRAND D
+		where    A.WORK_ID = B.WORK_ID
+		and      A.CMPY_ID = C.CMPY_ID
+		and      A.BRAND_ID = D.BRAND_ID
+		and      A.IDX = #{idx}
+ 	</select>
+
  	<!-- Work List -->
  	<select id="getWorkList"  resultType="smb.sales.dto.DtoWork">
 		select   WORK_ID
@@ -67,6 +98,7 @@
 		           ,amt_kakao_money
 		           ,net_sales_money
 		           ,refund_money
+		           ,target_count
 		           ,perform_count
 		           ,reg_id
 		           ,reg_date
@@ -83,13 +115,35 @@
 		           ,#{amt_kakao_money}
 		           ,#{net_sales_money}
 		           ,#{refund_money}
+		           ,#{target_count}
 		           ,#{perform_count}
 		           ,'SYSTEM'
 		           ,replace(convert(varchar(10), getDate(), 120), '-', '')
 		           ,replace(convert(varchar(8), getDate(), 108), ':', '')
 		)
 	</insert>
- 	
+
+ 	<!-- Update Sales Data -->
+	<update id="updateSalesData" parameterType="smb.sales.dto.DtoSales">
+		update TB_SMB_SALES set
+		       work_id = #{work_id}
+		      ,cmpy_id = #{cmpy_id}
+		      ,brand_id = #{brand_id}
+		      ,amt_year = #{amt_year}
+		      ,amt_month = #{amt_month}
+		      ,amt_term = #{amt_term}
+		      ,sales_money = #{sales_money}
+		      ,amt_money = #{amt_money}
+		      ,amt_kakao_money = #{amt_kakao_money}
+		      ,net_sales_money = #{net_sales_money}
+		      ,refund_money = #{refund_money}
+		      ,target_count = #{target_count}
+		      ,perform_count = #{perform_count}
+		      ,upd_id = 'SYSTEM'
+		      ,upd_date = replace(convert(varchar(10), getDate(), 120), '-', '')
+		      ,upd_time = replace(convert(varchar(8), getDate(), 108), ':', '')
+		 where idx = #{idx}
+	</update> 	
  	
  	<!-- Insert Sales Data -->
 	<delete id="deleteSalesData" parameterType="String">
