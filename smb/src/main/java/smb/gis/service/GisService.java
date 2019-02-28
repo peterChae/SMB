@@ -5,6 +5,7 @@ import java.util.List;
 import smb.common.dto.DtoBranch;
 import smb.common.dto.DtoDeliveryStore;
 import smb.common.dto.DtoMatchingList;
+import smb.common.dto.DtoUser;
 
 public interface GisService {
 	
@@ -40,4 +41,7 @@ public interface GisService {
 	 * GisController - setBranchDistance
 	 */
 	Integer insertMatchingData(DtoMatchingList dto_matchinglist) throws Exception;
+	
+	
+	DtoUser getUserInfo() throws Exception;
 }

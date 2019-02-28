@@ -4,17 +4,19 @@
 	<section class="sidebar">
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
-			<li class="header">MAIN NAVIGATION</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-dashboard"></i> <span>GIS</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-dashboard"></i> <span>Setting</span>
-				</a>
-			</li>
+			<c:choose>
+       			<c:when test="${msg}">
+           			<li class="header">MAIN NAVIGATION</li>
+					<li><a href="logout.do"><i class="fa fa-lock"></i><span> LOGOUT</span></a></li>
+					<li><a href="initGis.do?brand=${brand}"><i class="fa fa-book"></i><span> GIS</span></a></li>
+					<li><a href="setting.do"><i class="fa fa-book"></i><span> SETTING</span></a></li>
+       			</c:when>
+       			<c:otherwise>
+           			<li class="header">MAIN NAVIGATION</li>
+					<li><a href="#"><i class="fa fa-lock"></i><span> LOGIN</span></a></li>
+					<li><a href="initGis.do?brand=${brand}"><i class="fa fa-book"></i><span> GIS</span></a></li>
+       			</c:otherwise>
+   			</c:choose>
 		</ul>
 	</section>
 	<!-- /.sidebar -->

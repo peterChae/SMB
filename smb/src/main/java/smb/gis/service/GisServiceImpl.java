@@ -12,6 +12,7 @@ import smb.common.dao.GisDao;
 import smb.common.dto.DtoBranch;
 import smb.common.dto.DtoDeliveryStore;
 import smb.common.dto.DtoMatchingList;
+import smb.common.dto.DtoUser;
 
 @Service("gisService")
 public class GisServiceImpl implements GisService
@@ -79,5 +80,11 @@ public class GisServiceImpl implements GisService
 	@Override
 	public Integer insertMatchingData(DtoMatchingList dto_matchinglist) throws Exception {
 		return gisDao.insertMatchingData(dto_matchinglist);
+	}
+	
+	@Override
+	public DtoUser getUserInfo() throws Exception {
+		// TODO Auto-generated method stub
+		return gisDao.getUserInfo();
 	}
 }

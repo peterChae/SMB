@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="gis">
+
+	<!-- User Info -->
+	<select id="userInfo" resultType="smb.common.dto.DtoUser">
+		select Login_ID, Login_PW
+		from TEST_LOGIN
+		<!-- where Login_ID = #{id} and Login_PW = #{pw} -->
+	</select>
+
 	<!-- Delivery Count -->
 	<select id="deliveryCount" resultType="String">
 		select count(*) as COUNT 

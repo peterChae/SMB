@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import smb.common.dto.DtoBranch;
 import smb.common.dto.DtoDeliveryStore;
 import smb.common.dto.DtoMatchingList;
+import smb.common.dto.DtoUser;
 
 @Repository("gisDao")
 public class GisDao extends AbstractDao {
@@ -81,7 +82,17 @@ public class GisDao extends AbstractDao {
 		return (Integer)insert("gis.insertBranchConvertAddr", dto_branch);
 	}
 
-	public Integer insertMatchingData(DtoMatchingList dto_matchinglist) throws Exception {
-		return (Integer)insert("gis.insertMatchingData", dto_matchinglist);
+	public Integer insertMatchingData(DtoMatchingList dto_matchinglist) {
+		
+		try {
+			return (Integer)insert("gis.insertMatchingData", dto_matchinglist);
+		} catch(Exception e) {
+			log.debug("exception : " + dto_matchinglist.getBranch_id() + "/" + dto_matchinglist.getStore_id() + "/" + dto_matchinglist.getDistance());
+			return 0;
+		}
+	}
+	
+	public DtoUser getUserInfo() throws Exception {
+		return (DtoUser)selectOne("gis.userInfo");
 	}
 }

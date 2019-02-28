@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import smb.common.dto.DtoBranch;
 import smb.common.dto.DtoDeliveryStore;
 import smb.common.dto.DtoMatchingList;
+import smb.common.dto.DtoUser;
 import smb.common.util.AjaxResult;
 import smb.gis.service.GisService;
 
@@ -28,6 +31,68 @@ public class GisController {
 	
 	@Resource(name="gisService")
 	private GisService gisService;
+	
+	
+	@RequestMapping(value="/login.do", method = RequestMethod.GET)
+	public String onLogin() throws Exception {
+
+		return "login";
+	}
+	@RequestMapping(value="/excel_form.do", method = RequestMethod.GET)
+	public String excel_form() throws Exception {
+
+		return "excel_form";
+	}
+	@RequestMapping(value="/excel_insert.do", method = RequestMethod.GET)
+	public String excel_insert() throws Exception {
+
+		return "excel_insert";
+	}
+	
+	@RequestMapping(value="/setting.do", method = RequestMethod.GET)
+	public String setting() throws Exception {
+
+		return "setting";
+	}
+	
+	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
+	public String onLogout() throws Exception {
+
+		return "main";
+	}
+	
+	@RequestMapping(value="/goMain.do", method=RequestMethod.GET)
+	public String goMain(Model model, HttpServletRequest request) {
+		request.getAttribute("msg");
+		
+		model.addAttribute("msg",request.getAttribute("msg"));
+		
+		return "main";
+	}
+	
+	@RequestMapping(value="/confirmLogin.do", method = RequestMethod.GET)
+	public String confirmLogin(Model model, HttpServletRequest request) throws Exception {
+		
+		DtoUser dtoUser = gisService.getUserInfo();
+		String email = request.getParameter("email");
+		String pw = request.getParameter("pw");
+		
+		if(dtoUser.getLogin_ID().equals(email) && dtoUser.getLogin_PW().equals(pw)) {
+			model.addAttribute("msg","true");
+			//model.addAttribute("url","/smb/goMain.do");
+			return "main";
+		}
+		else {
+			model.addAttribute("msg", "none");
+			//model.addAttribute("url", "/smb/login.do");
+			return "login";
+		}
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/initGis.do", method = RequestMethod.GET)
 	public String initGis(@RequestParam("brand") String brand) throws Exception {
@@ -41,6 +106,8 @@ public class GisController {
 			return "redirect:DropTop.do";
 		else if(brand.toLowerCase().equals("quiznos"))
 			return "redirect:Quiznos.do";
+		else if(brand.toLowerCase().equals("norang"))
+			return "redirect:Norang.do";
 		else
 			return "main";
 	}
@@ -50,8 +117,30 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/initGis");
+		ModelAndView mv = new ModelAndView("/main");
 		String brand = "QUIZNOS";
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("brand", brand);
+		mv.addObject("deliveryCount", gisService.getDeliveryCount());
+		mv.addObject("branchCount", gisService.getBranchCount(brand));
+
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/Norang.do", method = RequestMethod.GET)
+	public ModelAndView Norang() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/main");
+		String brand = "NORANG";
 		
 		// -----------------------------------------------------------------------------
 		// Return Object Data Setting

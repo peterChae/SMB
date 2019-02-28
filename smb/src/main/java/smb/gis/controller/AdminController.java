@@ -38,7 +38,7 @@ public class AdminController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/initGis");
+		ModelAndView mv = new ModelAndView("/main");
 		
 		// -----------------------------------------------------------------------------
 		// Get Target Branch Data
@@ -97,7 +97,7 @@ public class AdminController {
 		// -----------------------------------------------------------------------------
 		// New Return Object 
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/initGis");
+		ModelAndView mv = new ModelAndView("/main");
 		
 		// -----------------------------------------------------------------------------
 		// DeliveryStore, Branch, Matching, UnMatching -> Get Data (List<Dto>)
@@ -127,6 +127,7 @@ public class AdminController {
 		        double dist = geoCalc.calculateGeodeticCurve(reference, userPos, pointA).getEllipsoidalDistance();
 		        
 //		        if(dist >= 1 && dist < 1001) {
+//		        if(dist >= 1001 && dist < 3001) {
 		        if(dist < 3001) {
 		        	
 		        	DtoMatchingList dto_matchinglist = new DtoMatchingList();
