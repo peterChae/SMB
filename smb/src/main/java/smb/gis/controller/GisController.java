@@ -108,6 +108,8 @@ public class GisController {
 			return "redirect:Quiznos.do";
 		else if(brand.toLowerCase().equals("norang"))
 			return "redirect:Norang.do";
+		else if(brand.toLowerCase().equals("meagcoffee"))
+			return "redirect:MeagCoffee.do";
 		else
 			return "main";
 	}
@@ -119,6 +121,27 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		ModelAndView mv = new ModelAndView("/main");
 		String brand = "QUIZNOS";
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("brand", brand);
+		mv.addObject("deliveryCount", gisService.getDeliveryCount());
+		mv.addObject("branchCount", gisService.getBranchCount(brand));
+
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
+	
+	@RequestMapping(value = "/MegaCoffee.do", method = RequestMethod.GET)
+	public ModelAndView MegaCoffee() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/main");
+		String brand = "MegaCoffee";
 		
 		// -----------------------------------------------------------------------------
 		// Return Object Data Setting
