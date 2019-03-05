@@ -81,7 +81,7 @@
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
 		         from     tb_smb_sales
-		         where    amt_year = '2019'
+		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
 		         ) A
@@ -108,7 +108,7 @@
 		         from     tb_smb_sales a
 		                 ,tb_smb_company b
 		         where    a.cmpy_id = b.cmpy_id
-		         and      a.amt_year = '2019'
+		         and      a.amt_year = #{amt_year}
 		         group by b.cmpy_id
 		                 ,b.cmpy_nm
 		                 ,amt_year
@@ -138,7 +138,7 @@
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
 		         from     tb_smb_sales
-		         where    amt_year = '2019'
+		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
 		         ) A
@@ -165,7 +165,7 @@
 		         from     tb_smb_sales a
 		                 ,tb_smb_brand b
 		         where    a.brand_id = b.brand_id
-		         and      a.amt_year = '2019'
+		         and      a.amt_year = #{amt_year}
 		         group by b.brand_id
 		                 ,b.brand_nm
 		                 ,amt_year
