@@ -104,8 +104,7 @@
 	</section>
 	<!-- /.content -->
 	
-</div>
-<!-- /.Content Wrapper -->
+</div><!-- /.Content Wrapper -->
 
 </div>
 <!-- /.Wrapper -->

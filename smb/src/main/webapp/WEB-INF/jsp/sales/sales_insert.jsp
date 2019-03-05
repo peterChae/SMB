@@ -289,7 +289,7 @@ $('#fmBtnInsert').click(function() {
 		},
 		success : function(ajaxResult) {
 			if(confirm("저장되었습니다.\n추가로 입력할 데이터가 있습니까?")) {
-				window.location = "/smb/SalesRegister.do"
+				window.location = "/smb/SalesInsertForm.do"
 			} else {
 				window.location = "/smb/SalesList.do"
 			}
