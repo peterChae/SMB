@@ -56,13 +56,133 @@
 
 	<!-- Main content -->	
 	<section class="content">
+	
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="nav-tabs-custom">
+					<ul class="nav nav-tabs pull-right">
+						<li class="active"><a href="#sales-cost-list" data-toggle="tab">List</a></li>
+						<li><a id="sales_cost_link" href="#sales-cost-chart" data-toggle="tab">Chart</a></li>
+						<li class="pull-left header"><i class="fa fa-inbox"></i> 원가 리포트</li>
+					</ul>
+					<div class="tab-content no-padding">
+						<div class="chart tab-pane active" id="sales-cost-list" style="position: relative;">
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="salesList" class="table">
+									<tr align="center" bgcolor="#0070C0">
+										<td><report_title>업무명</report_title></td>
+										<td width="7%"><report_title>1월</report_title></td>
+										<td width="7%"><report_title>2월</report_title></td>
+										<td width="7%"><report_title>3월</report_title></td>
+										<td width="7%"><report_title>4월</report_title></td>
+										<td width="7%"><report_title>5월</report_title></td>
+										<td width="7%"><report_title>6월</report_title></td>
+										<td width="7%"><report_title>7월</report_title></td>
+										<td width="7%"><report_title>8월</report_title></td>
+										<td width="7%"><report_title>9월</report_title></td>
+										<td width="7%"><report_title>10월</report_title></td>
+										<td width="7%"><report_title>11월</report_title></td>
+										<td width="7%"><report_title>12월</report_title></td>
+									</tr>
+									<c:forEach items="${salesReport_cost}" var="row">
+									
+										<c:set var="work_id" value="${row.cost_id}" scope="session"/>
+										<c:choose>
+											<c:when test="${work_id eq 'total'}">
+												<tr align="center" bgcolor="#ffff00">
+													<td><total_title>합계</total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_1}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_2}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_3}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_4}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_5}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_6}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_7}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_8}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_9}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_10}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_11}" pattern="#,###" /></total_title></td>
+													<td><total_title><fmt:formatNumber value="${row.sales_12}" pattern="#,###" /></total_title></td>
+												</tr>  
+											</c:when>
+											<c:otherwise>
+												<tr align="center">
+													<td>${row.cost_nm}</td>
+													<td><fmt:formatNumber value="${row.sales_1}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_2}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_3}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_4}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_5}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_6}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_7}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_8}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_9}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_10}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_11}" pattern="#,###" /></td>
+													<td><fmt:formatNumber value="${row.sales_12}" pattern="#,###" /></td>
+												</tr>  
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</table>
+							</div>
+							<!-- /.box-body -->						
+						</div>
+
+						<div class="chart tab-pane" id="sales-cost-chart" style="position: relative;">
+							<section class="content">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="box box-primary">
+											<div class="box-header with-border">
+												<h3 class="box-title">${amt_year}년 누적 데이터</h3>
+											</div>
+											<div class="box-body">
+												<div class="chart">
+													<canvas id="sales-cost-chart-donut"></canvas>
+												</div>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- /.box -->
+									</div>
+									<!-- /.col (LEFT) -->
+									
+									<div class="col-md-8">
+										<div class="box box-primary">
+											<div class="box-header with-border">
+												<h3 class="box-title">월별 데이터</h3>
+											</div>
+											<div class="box-body">
+												<div class="chart">
+												<canvas id="sales-cost-chart-area"></canvas>
+												</div>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- /.box -->
+									</div>
+									<!-- /.col (RIGHT) -->
+								</div>
+								<!-- /.row -->
+							</section>
+						</div>
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs pull-right">
 						<li class="active"><a href="#sales-work-list" data-toggle="tab">List</a></li>
 						<li><a id="sales_work_link" href="#sales-work-chart" data-toggle="tab">Chart</a></li>
-						<li class="pull-left header"><i class="fa fa-inbox"></i> SMB Sales Report</li>
+						<li class="pull-left header"><i class="fa fa-inbox"></i> 업무별 실적</li>
 					</ul>
 					<div class="tab-content no-padding">
 						<div class="chart tab-pane active" id="sales-work-list" style="position: relative;">
@@ -146,8 +266,8 @@
 										</div>
 										<!-- /.box -->
 									</div>
-							
 									<!-- /.col (LEFT) -->
+									
 									<div class="col-md-8">
 										<div class="box box-primary">
 											<div class="box-header with-border">
@@ -265,16 +385,32 @@
 										</div>
 										<!-- /.box -->
 									</div>
-							
 									<!-- /.col (LEFT) -->
-									<div class="col-md-8">
+									
+									<div class="col-md-4">
 										<div class="box box-primary">
 											<div class="box-header with-border">
-												<h3 class="box-title">월별 데이터</h3>
+												<h3 class="box-title">카카오 매출 누적 데이터</h3>
 											</div>
 											<div class="box-body">
 												<div class="chart">
-												<canvas id="sales-company-chart-area"></canvas>
+												<canvas id="sales-company-chart-donut2"></canvas>
+												</div>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- /.box -->
+									</div>
+									<!-- /.col (MID) -->
+									
+									<div class="col-md-4">
+										<div class="box box-primary">
+											<div class="box-header with-border">
+												<h3 class="box-title">기업물류 매출 누적 데이터</h3>
+											</div>
+											<div class="box-body">
+												<div class="chart">
+												<canvas id="sales-company-chart-donut3"></canvas>
 												</div>
 											</div>
 											<!-- /.box-body -->
@@ -387,16 +523,32 @@
 										</div>
 										<!-- /.box -->
 									</div>
-							
 									<!-- /.col (LEFT) -->
-									<div class="col-md-8">
+
+									<div class="col-md-4">
 										<div class="box box-primary">
 											<div class="box-header with-border">
-												<h3 class="box-title">월별 데이터</h3>
+												<h3 class="box-title">브랜드별 매출 (카카오 제외)</h3>
 											</div>
 											<div class="box-body">
 												<div class="chart">
-												<canvas id="sales-brand-chart-area"></canvas>
+												<canvas id="sales-brand-chart-donut2"></canvas>
+												</div>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- /.box -->
+									</div>
+									<!-- /.col (RIGHT) -->
+									
+									<div class="col-md-4">
+										<div class="box box-primary">
+											<div class="box-header with-border">
+												<h3 class="box-title">브랜드별 수행건수 (카카오 제외)</h3>
+											</div>
+											<div class="box-body">
+												<div class="chart">
+												<canvas id="sales-brand-chart-donut3"></canvas>
 												</div>
 											</div>
 											<!-- /.box-body -->
@@ -448,9 +600,24 @@ $(function () {
 /**
  * Chart Link Click - Chart Canvas Redraw
  */
+$('#sales_cost_link').click(function() { setTimeout(getSalesCostChart, 100); });
 $('#sales_work_link').click(function() { setTimeout(getSalesWorkChart, 100); });
 $('#sales_company_link').click(function() {	setTimeout(getSalesCompanyChart, 100); });
 $('#sales_brand_link').click(function() { setTimeout(getSalesBrandChart, 100); });
+
+
+/**
+ * Sales Work Chart
+ */
+function getSalesCostChart() {
+	$('#sales-cost-chart-donut').height(300);
+	$('#sales-cost-chart-area').height(300);
+	
+	var sales_cost_donut_canvas = $("#sales-cost-chart-donut").get(0).getContext("2d");
+	var sales_cost_donut_data   = setDonutChartData('sales_cost');
+	
+	donutChartDraw(sales_cost_donut_canvas, sales_cost_donut_data);
+}
 
 
 /**
@@ -476,18 +643,13 @@ function getSalesWorkChart() {
  */
 function getSalesCompanyChart() {
 	$('#sales-company-chart-donut').height(300);
-	$('#sales-company-chart-area').height(300);
+	$('#sales-company-chart-donut2').height(300);
+	$('#sales-company-chart-donut3').height(300);
 	
 	var sales_company_donut_canvas = $("#sales-company-chart-donut").get(0).getContext("2d");
 	var sales_company_donut_data   = setDonutChartData('sales_company');
 	
-	/*
-	var sales_company_area_canvas  = $("#sales-company-chart-area").get(0).getContext("2d");
-	var sales_company_area_data    = setAreaChartData('sales_company');
-	*/
-	
 	donutChartDraw(sales_company_donut_canvas, sales_company_donut_data);
-	//areaChartDraw(sales_company_area_canvas, sales_company_area_data);
 }
 
 
@@ -496,18 +658,13 @@ function getSalesCompanyChart() {
  */
 function getSalesBrandChart() {
 	$('#sales-brand-chart-donut').height(300);
-	$('#sales-brand-chart-area').height(300);
+	$('#sales-brand-chart-donut2').height(300);
+	$('#sales-brand-chart-donut3').height(300);
 	
 	var sales_brand_donut_canvas = $("#sales-brand-chart-donut").get(0).getContext("2d");
 	var sales_brand_donut_data   = setDonutChartData('sales_brand');
 	
-	/*
-	var sales_brand_area_canvas  = $("#sales-brand-chart-area").get(0).getContext("2d");
-	var sales_brand_area_data    = setAreaChartData('sales_brand');
-	*/
-	
 	donutChartDraw(sales_brand_donut_canvas, sales_brand_donut_data);
-	//areaChartDraw(sales_brand_area_canvas, sales_brand_area_data);
 }
 
 
@@ -520,9 +677,61 @@ function setDonutChartData(data)
 	var tmp_data; 
 	
 	// -----------------------------------------------------------------------------------------
+	// Sales Cost 
+	// -----------------------------------------------------------------------------------------
+	if(data == "sales_cost") {
+		<c:forEach items="${salesReport_cost}" var="row">
+			var json = new Object();
+			json.name = "${row.cost_nm}";
+			json.sales = ${row.sales_1} + ${row.sales_2} + ${row.sales_3} + ${row.sales_4} + ${row.sales_5} + ${row.sales_6}
+						 + ${row.sales_7} + ${row.sales_8} + ${row.sales_9} + ${row.sales_10} + ${row.sales_11} + ${row.sales_12};
+			tmp_arr.push(json);
+		</c:forEach>
+		
+		tmp_data = [
+			{
+				label: tmp_arr[1].name + " (" + Math.round(tmp_arr[1].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[1].sales,
+				color: "#ffcd00",
+				highlight: "#ffcd00"
+			},
+			{
+				label: tmp_arr[2].name + " (" + Math.round(tmp_arr[2].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[2].sales,
+				color: "#00a65a",
+				highlight: "#00a65a"
+			},
+			{
+				label: tmp_arr[3].name + " (" + Math.round(tmp_arr[3].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[3].sales,
+				color: "#f39c12",
+				highlight: "#f39c12"
+			},
+			{
+				label: tmp_arr[4].name + " (" + Math.round(tmp_arr[4].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[4].sales,
+				color: "#00c0ef",
+				highlight: "#00c0ef"
+			},
+			{
+				label: tmp_arr[5].name + " (" + Math.round(tmp_arr[5].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[5].sales,
+				color: "#3c8dbc",
+				highlight: "#3c8dbc"
+			},
+			{
+				label: tmp_arr[6].name + " (" + Math.round(tmp_arr[6].sales / tmp_arr[0].sales * 100) + "%)",
+				value: tmp_arr[6].sales,
+				color: "#f56954",
+				highlight: "#f56954"
+			}
+		];
+	}
+	
+	// -----------------------------------------------------------------------------------------
 	// Sales Work 
 	// -----------------------------------------------------------------------------------------
-	if(data == "sales_work") {
+	else if(data == "sales_work") {
 		<c:forEach items="${salesReport_work}" var="row">
 			var json = new Object();
 			json.name = "${row.work_nm}";

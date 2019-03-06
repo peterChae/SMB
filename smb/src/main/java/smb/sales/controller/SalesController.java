@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import smb.common.util.AjaxResult;
+import smb.sales.dto.DtoCostSales;
 import smb.sales.dto.DtoSales;
 import smb.sales.service.SalesService;
 
@@ -75,6 +76,25 @@ public class SalesController {
 	}
 	
 	
+	@RequestMapping(value = "/CostSalesList.do", method = RequestMethod.GET)
+	public ModelAndView CostSalesList() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/sales/cost_sales_list");
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("costSalesList", salesService.getCostSalesList());
+
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
+	
+	
 	@RequestMapping(value = "/SalesInsertForm.do", method = RequestMethod.GET)
 	public ModelAndView SalesInsertForm() throws Exception {
 		// -----------------------------------------------------------------------------
@@ -88,6 +108,25 @@ public class SalesController {
 		mv.addObject("workList",  salesService.getWorkList());
 		mv.addObject("cmpyList",  salesService.getCmpyList());
 		mv.addObject("brandList", salesService.getBrandList());
+
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/CostSalesInsertForm.do", method = RequestMethod.GET)
+	public ModelAndView CostSalesInsertForm() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/sales/cost_sales_insert");
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		mv.addObject("costList",  salesService.getCostList());
 
 		// -----------------------------------------------------------------------------
 		// Return 
@@ -132,6 +171,31 @@ public class SalesController {
 		// -----------------------------------------------------------------------------
 		int insertCount = 0;
 		insertCount = salesService.insertSalesData(dto_sales); 
+		log.debug("insert sales data : " + insertCount);
+		
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		ajaxResult.setData(resultMap);
+		return ajaxResult;
+	}
+	
+	
+
+	@RequestMapping(value = "/CostSalesInsert.do", produces="application/json; charset=UTF-8", method = RequestMethod.GET)
+	@ResponseBody
+	public AjaxResult CostSalesInsert(@ModelAttribute DtoCostSales dto_cost_sales) throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		AjaxResult ajaxResult = new AjaxResult();
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		int insertCount = 0;
+		insertCount = salesService.insertCostSalesData(dto_cost_sales); 
 		log.debug("insert sales data : " + insertCount);
 		
 		// -----------------------------------------------------------------------------

@@ -31,7 +31,8 @@ public class SalesReportController {
 		// Return Object Data Setting
 		// -----------------------------------------------------------------------------
 		mv.addObject("amt_year", amt_year);
-		mv.addObject("salesReport_work", salesReportService.getSalesReport(amt_year));
+		mv.addObject("salesReport_cost", salesReportService.getSalesReport_Cost(amt_year));
+		mv.addObject("salesReport_work", salesReportService.getSalesReport_Work(amt_year));
 		mv.addObject("salesReport_company", salesReportService.getSalesReport_Company(amt_year));
 		mv.addObject("salesReport_brand", salesReportService.getSalesReport_Brand(amt_year));
 

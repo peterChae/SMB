@@ -3,12 +3,15 @@ package smb.sales.dto;
 import java.math.BigDecimal;
 
 public class DtoSalesReport {
+	private String		idx;
 	private String		work_id;
 	private String		work_nm;
 	private String		cmpy_id;
 	private String		cmpy_nm;
 	private String		brand_id;
 	private String		brand_nm;
+	private String		cost_id;
+	private String		cost_nm;
 	private String		amt_year;
 	private String		amt_month;
 	private String		amt_term;
@@ -25,6 +28,24 @@ public class DtoSalesReport {
 	private BigDecimal  sales_11;
 	private BigDecimal  sales_12;	
 	
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
+	}
+	public String getCost_id() {
+		return cost_id;
+	}
+	public void setCost_id(String cost_id) {
+		this.cost_id = cost_id;
+	}
+	public String getCost_nm() {
+		return cost_nm;
+	}
+	public void setCost_nm(String cost_nm) {
+		this.cost_nm = cost_nm;
+	}
 	public String getAmt_term() {
 		return amt_term;
 	}

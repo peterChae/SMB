@@ -3,8 +3,70 @@
  
 <mapper namespace="sales_report">
 
-	<!-- Sales List -->
- 	<select id="getSalesReport"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+ 	<!-- Sales Company List -->
+ 	<select id="getSalesReport_Cost"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   '1' as idx
+		        ,'total' as cost_id
+		        ,'합계' as cost_nm
+		        ,max(case when amt_month = '01' then cost_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then cost_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then cost_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then cost_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then cost_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then cost_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then cost_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then cost_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then cost_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then cost_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then cost_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then cost_money else 0 end) sales_12
+		from    (select   amt_year
+		                 ,amt_month
+		                 ,sum(cost_money) as cost_money
+		         from     tb_smb_cost_sales
+		         where    amt_year = #{amt_year}
+		         group by amt_year
+		                 ,amt_month
+		         ) A
+		union
+		select   idx
+		        ,cost_id
+		        ,cost_nm
+		        ,max(case when amt_month = '01' then cost_money else 0 end) sales_1
+		        ,max(case when amt_month = '02' then cost_money else 0 end) sales_2
+		        ,max(case when amt_month = '03' then cost_money else 0 end) sales_3
+		        ,max(case when amt_month = '04' then cost_money else 0 end) sales_4
+		        ,max(case when amt_month = '05' then cost_money else 0 end) sales_5
+		        ,max(case when amt_month = '06' then cost_money else 0 end) sales_6
+		        ,max(case when amt_month = '07' then cost_money else 0 end) sales_7
+		        ,max(case when amt_month = '08' then cost_money else 0 end) sales_8
+		        ,max(case when amt_month = '09' then cost_money else 0 end) sales_9
+		        ,max(case when amt_month = '10' then cost_money else 0 end) sales_10
+		        ,max(case when amt_month = '11' then cost_money else 0 end) sales_11
+		        ,max(case when amt_month = '12' then cost_money else 0 end) sales_12
+		from    (select   '2' as idx
+		                 ,b.cost_id
+		                 ,(b.cost_cate_nm + ' / ' + b.cost_nm) as cost_nm
+		                 ,amt_year
+		                 ,amt_month
+		                 ,sum(cost_money) as cost_money
+		         from     tb_smb_cost_sales a
+		                 ,tb_smb_cost b
+		         where    a.cost_id = b.cost_id
+		         and      a.amt_year = #{amt_year}
+		         group by b.cost_id
+		                 ,b.cost_cate_nm + ' / ' + b.cost_nm
+		                 ,amt_year
+		                 ,amt_month
+		         ) A
+		group by idx
+		        ,cost_id
+		        ,cost_nm
+		order by idx
+ 	</select>
+
+	<!-- Sales Work List -->
+ 	<select id="getSalesReport_Work"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
 		select   'total' as work_id
 		        ,'합계' as work_nm
 		        ,max(case when amt_month = '01' then net_sales_money else 0 end) sales_1

@@ -20,8 +20,13 @@ public class SalesReportServiceImpl implements SalesReportService {
 	private SalesReportDao salesReportDao;
 
 	@Override
-	public List<DtoSalesReport> getSalesReport(String amt_year) throws Exception {
-		return salesReportDao.getSalesReport(amt_year);
+	public List<DtoSalesReport> getSalesReport_Cost(String amt_year) throws Exception {
+		return salesReportDao.getSalesReport_Cost(amt_year);
+	}
+	
+	@Override
+	public List<DtoSalesReport> getSalesReport_Work(String amt_year) throws Exception {
+		return salesReportDao.getSalesReport_Work(amt_year);
 	}
 
 	@Override

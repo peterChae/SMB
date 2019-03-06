@@ -84,6 +84,15 @@
 		order by BRAND_ID
  	</select>
  	
+ 	<!-- Cost List -->
+ 	<select id="getCostList"  resultType="smb.sales.dto.DtoCost">
+		select   COST_ID
+		        ,COST_CATE_NM
+		        ,COST_NM
+		from     TB_SMB_COST
+		order by COST_ID
+ 	</select>
+ 	
  	<!-- Insert Sales Data -->
 	<insert id="insertSalesData" parameterType="smb.sales.dto.DtoSales">
 		insert into TB_SMB_SALES (
@@ -149,5 +158,42 @@
 	<delete id="deleteSalesData" parameterType="String">
 		delete from TB_SMB_SALES where idx = #{idx}
 	</delete>
+ 
+ 	<!-- Cost Sales List -->
+ 	<select id="getCostSalesList"  resultType="smb.sales.dto.DtoCostSales">
+		select   A.IDX
+		        ,B.COST_ID
+		        ,B.COST_CATE_NM
+		        ,B.COST_NM
+		        ,A.AMT_YEAR
+		        ,A.AMT_MONTH
+		        ,A.COST_MONEY
+		from     TB_SMB_COST_SALES A
+		        ,TB_SMB_COST B
+		where    A.COST_ID = B.COST_ID
+		order by A.AMT_YEAR desc, A.AMT_MONTH desc
+ 	</select>
+ 
+ 
+ 	<!-- Insert Sales Data -->
+	<insert id="insertCostSalesData" parameterType="smb.sales.dto.DtoCostSales">
+		insert into TB_SMB_COST_SALES (
+		            cost_id
+		           ,amt_year
+		           ,amt_month
+		           ,cost_money
+		           ,reg_id
+		           ,reg_date
+		           ,reg_time
+		) values (
+		            #{cost_id}
+		           ,#{amt_year}
+		           ,#{amt_month}
+		           ,#{cost_money}
+		           ,'SYSTEM'
+		           ,replace(convert(varchar(10), getDate(), 120), '-', '')
+		           ,replace(convert(varchar(8), getDate(), 108), ':', '')
+		)
+	</insert>
  	 	
 </mapper>

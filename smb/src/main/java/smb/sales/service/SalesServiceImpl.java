@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import smb.sales.dao.SalesDao;
 import smb.sales.dto.DtoBrand;
 import smb.sales.dto.DtoCompany;
+import smb.sales.dto.DtoCost;
+import smb.sales.dto.DtoCostSales;
 import smb.sales.dto.DtoSales;
 import smb.sales.dto.DtoWork;
 
@@ -46,7 +48,7 @@ public class SalesServiceImpl implements SalesService {
 	public List<DtoBrand> getBrandList() throws Exception {
 		return salesDao.getBrandList();
 	}
-
+	
 	@Override
 	public Integer insertSalesData(DtoSales dto_sales) throws Exception {
 		return salesDao.insertSalesData(dto_sales);
@@ -60,6 +62,21 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public Integer deleteSalesData(String idx) throws Exception {
 		return salesDao.deleteSalesData(idx);
+	}
+	
+	@Override
+	public List<DtoCostSales> getCostSalesList() throws Exception {
+		return salesDao.getCostSalesList();
+	}
+	
+	@Override
+	public List<DtoCost> getCostList() throws Exception {
+		return salesDao.getCostList();
+	}
+	
+	@Override
+	public Integer insertCostSalesData(DtoCostSales dto_cost_sales) throws Exception {
+		return salesDao.insertCostSalesData(dto_cost_sales);
 	}
 
 }

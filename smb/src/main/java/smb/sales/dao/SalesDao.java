@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import smb.common.dao.AbstractDao;
 import smb.sales.dto.DtoBrand;
 import smb.sales.dto.DtoCompany;
+import smb.sales.dto.DtoCost;
+import smb.sales.dto.DtoCostSales;
 import smb.sales.dto.DtoSales;
 import smb.sales.dto.DtoWork;
 
@@ -40,7 +42,7 @@ public class SalesDao extends AbstractDao  {
 	public List<DtoBrand> getBrandList() throws Exception {
 		return (List<DtoBrand>)selectList("sales.getBrandList");
 	}
-
+	
 	public Integer insertSalesData(DtoSales dto_sales) throws Exception {
 		return (Integer)insert("sales.insertSalesData", dto_sales);
 	}
@@ -51,6 +53,20 @@ public class SalesDao extends AbstractDao  {
 
 	public Integer deleteSalesData(String idx) throws Exception {
 		return (Integer)delete("sales.deleteSalesData", idx);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DtoCostSales> getCostSalesList() throws Exception {
+		return (List<DtoCostSales>)selectList("sales.getCostSalesList");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DtoCost> getCostList() throws Exception {
+		return (List<DtoCost>)selectList("sales.getCostList");
+	}
+	
+	public Integer insertCostSalesData(DtoCostSales dto_cost_sales) throws Exception {
+		return (Integer)insert("sales.insertCostSalesData", dto_cost_sales);
 	}
 	
 }

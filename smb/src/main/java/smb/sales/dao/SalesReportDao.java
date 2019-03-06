@@ -15,8 +15,13 @@ public class SalesReportDao extends AbstractDao  {
 	Logger log = LoggerFactory.getLogger(SalesReportDao.class);
 	
 	@SuppressWarnings("unchecked")
-	public List<DtoSalesReport> getSalesReport(String amt_year) throws Exception {
-		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport", amt_year);
+	public List<DtoSalesReport> getSalesReport_Cost(String amt_year) throws Exception {
+		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport_Cost", amt_year);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<DtoSalesReport> getSalesReport_Work(String amt_year) throws Exception {
+		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport_Work", amt_year);
 	}
 
 	@SuppressWarnings("unchecked")
