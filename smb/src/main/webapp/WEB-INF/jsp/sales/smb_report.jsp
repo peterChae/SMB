@@ -104,10 +104,10 @@
 						<div class="chart tab-pane" id="sales-report-chart" style="position: relative;">
 							<section class="content">
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<div class="box box-primary">
 											<div class="box-header with-border">
-												<h3 class="box-title">${amt_year}년 월별 영업이익률</h3>
+												<h3 class="box-title">${amt_year}년 매출총이익</h3>
 											</div>
 											<div class="box-body">
 												<div class="chart">
@@ -118,6 +118,24 @@
 										</div>
 										<!-- /.box -->
 									</div>
+									<!-- /.col (LEFT) -->
+									
+									<div class="col-md-6">
+										<div class="box box-primary">
+											<div class="box-header with-border">
+												<h3 class="box-title">${amt_year}년 월별 영업이익률 (%)</h3>
+											</div>
+											<div class="box-body">
+												<div class="chart">
+													<canvas id="sales-report-chart-line2"></canvas>
+												</div>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- /.box -->
+									</div>
+									<!-- /.col (RIGHT) -->
+									
 								<!-- /.row -->
 							</section>
 						</div>
@@ -212,21 +230,7 @@
 									</div>
 									<!-- /.col (LEFT) -->
 									
-									<div class="col-md-8">
-										<div class="box box-primary">
-											<div class="box-header with-border">
-												<h3 class="box-title">월별 데이터</h3>
-											</div>
-											<div class="box-body">
-												<div class="chart">
-												<canvas id="sales-cost-chart-area"></canvas>
-												</div>
-											</div>
-											<!-- /.box-body -->
-										</div>
-										<!-- /.box -->
-									</div>
-									<!-- /.col (RIGHT) -->
+									
 								</div>
 								<!-- /.row -->
 							</section>
@@ -432,30 +436,14 @@
 									</div>
 									<!-- /.col (LEFT) -->
 									
-									<div class="col-md-4">
+									<div class="col-md-8">
 										<div class="box box-primary">
 											<div class="box-header with-border">
-												<h3 class="box-title">카카오 매출 누적 데이터</h3>
+												<h3 class="box-title">월별 카카오 주문하기 수금율 (%)</h3>
 											</div>
 											<div class="box-body">
 												<div class="chart">
-												<canvas id="sales-company-chart-donut2"></canvas>
-												</div>
-											</div>
-											<!-- /.box-body -->
-										</div>
-										<!-- /.box -->
-									</div>
-									<!-- /.col (MID) -->
-									
-									<div class="col-md-4">
-										<div class="box box-primary">
-											<div class="box-header with-border">
-												<h3 class="box-title">기업물류 매출 누적 데이터</h3>
-											</div>
-											<div class="box-body">
-												<div class="chart">
-												<canvas id="sales-company-chart-donut3"></canvas>
+												<canvas id="sales-company-chart-line"></canvas>
 												</div>
 											</div>
 											<!-- /.box-body -->
@@ -463,6 +451,7 @@
 										<!-- /.box -->
 									</div>
 									<!-- /.col (RIGHT) -->
+									
 								</div>
 								<!-- /.row -->
 							</section>						
@@ -545,7 +534,7 @@
 						<div class="chart tab-pane" id="sales-brand-chart" style="position: relative;">
 							<section class="content">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="box box-primary">
 											<div class="box-header with-border">
 												<h3 class="box-title">${amt_year}년 누적 데이터</h3>
@@ -561,7 +550,7 @@
 									</div>
 									<!-- /.col (LEFT) -->
 
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="box box-primary">
 											<div class="box-header with-border">
 												<h3 class="box-title">브랜드별 매출 (카카오 제외)</h3>
@@ -577,27 +566,12 @@
 									</div>
 									<!-- /.col (RIGHT) -->
 									
-									<div class="col-md-4">
-										<div class="box box-primary">
-											<div class="box-header with-border">
-												<h3 class="box-title">브랜드별 수행건수 (카카오 제외)</h3>
-											</div>
-											<div class="box-body">
-												<div class="chart">
-												<canvas id="sales-brand-chart-donut3"></canvas>
-												</div>
-											</div>
-											<!-- /.box-body -->
-										</div>
-										<!-- /.box -->
-									</div>
-									<!-- /.col (RIGHT) -->
 								</div>
 								<!-- /.row -->
 							</section>
 						</div>	
 					</div>
-              		<!-- /.box-footer -->
+					
 				</div>
 				<!-- /.box -->
 			</div>
@@ -626,17 +600,17 @@
 
 var chart_color = new Array();
 $(function () {
-	chart_color[0] = "#d2d6de";
+	chart_color[0] = "#f39c12";
 	chart_color[1] = "#ffcd00";
 	chart_color[2] = "#00a65a";
-	chart_color[3] = "#f39c12";
+	chart_color[3] = "#3c8dbc";
 	chart_color[4] = "#00c0ef";
-	chart_color[5] = "#3c8dbc";
-	chart_color[6] = "#f56954";
+	chart_color[5] = "#f56954";
+	chart_color[6] = "#d2d6de";
 	chart_color[7] = "#00a65a";
 	chart_color[8] = "#f39c12";
-	chart_color[9] = "#00c0ef";
-	chart_color[10] = "#3c8dbc";
+	chart_color[9] = "#3c8dbc";
+	chart_color[10] = "#d2d6de";
 });
 
 
@@ -655,11 +629,16 @@ $('#sales_brand_link').click(function() { setTimeout(getSalesBrandChart, 100); }
  */
 function getSalesReportChart() {
 	$('#sales-report-chart-line').height(300);
+	$('#sales-report-chart-line2').height(300);
 	
 	var sales_report_canvas = $("#sales-report-chart-line").get(0).getContext("2d");
 	var sales_report_data   = setAreaChartData('sales_report');
 	
+	var sales_report_canvas2 = $("#sales-report-chart-line2").get(0).getContext("2d");
+	var sales_report_data2   = setAreaChartData('sales_report2');
+
 	lineChartDraw(sales_report_canvas, sales_report_data);
+	lineChartDraw(sales_report_canvas2, sales_report_data2);
 }
 
 /**
@@ -667,7 +646,6 @@ function getSalesReportChart() {
  */
 function getSalesCostChart() {
 	$('#sales-cost-chart-donut').height(300);
-	$('#sales-cost-chart-area').height(300);
 	
 	var sales_cost_donut_canvas = $("#sales-cost-chart-donut").get(0).getContext("2d");
 	var sales_cost_donut_data   = setDonutChartData('sales_cost');
@@ -699,13 +677,37 @@ function getSalesWorkChart() {
  */
 function getSalesCompanyChart() {
 	$('#sales-company-chart-donut').height(300);
-	$('#sales-company-chart-donut2').height(300);
-	$('#sales-company-chart-donut3').height(300);
+	$('#sales-company-chart-line').height(300);
 	
 	var sales_company_donut_canvas = $("#sales-company-chart-donut").get(0).getContext("2d");
 	var sales_company_donut_data   = setDonutChartData('sales_company');
 	
+	var sales_company_line_canvas = $("#sales-company-chart-line").get(0).getContext("2d");
 	donutChartDraw(sales_company_donut_canvas, sales_company_donut_data);
+	
+	// 수금 데이터 Select
+	$.ajax({
+		type : 'GET',
+		data  : {amt_year : '${amt_year}'},
+		dataType: "json",
+		url : '/smb/getPerformRate.do',
+		contentType : 'application/json; charset=UTF-8',
+		error : function(ajaxResult) {
+			alert('에러: 데이터 송수신에 문제가 있습니다.');
+		},
+		success : function(ajaxResult) {
+			var tmp_arr = new Array();
+			for(var i=0; i<ajaxResult.data.performRate_list.length; i++) {
+				var json = new Object();
+				json.name = "수금율";
+				json.sales_1 = ajaxResult.data.performRate_list[i].sales_1;
+				json.sales_2 = ajaxResult.data.performRate_list[i].sales_2;
+				json.sales_3 = ajaxResult.data.performRate_list[i].sales_3;
+				tmp_arr.push(json);
+			}
+			lineChartDraw($("#sales-company-chart-line").get(0).getContext("2d"), makeData_Area(tmp_arr));
+		}
+	}); 
 }
 
 
@@ -715,12 +717,15 @@ function getSalesCompanyChart() {
 function getSalesBrandChart() {
 	$('#sales-brand-chart-donut').height(300);
 	$('#sales-brand-chart-donut2').height(300);
-	$('#sales-brand-chart-donut3').height(300);
 	
 	var sales_brand_donut_canvas = $("#sales-brand-chart-donut").get(0).getContext("2d");
 	var sales_brand_donut_data   = setDonutChartData('sales_brand');
 	
+	var sales_brand_donut_canvas2 = $("#sales-brand-chart-donut2").get(0).getContext("2d");
+	var sales_brand_donut_data2   = setDonutChartData('sales_brand2');
+
 	donutChartDraw(sales_brand_donut_canvas, sales_brand_donut_data);
+	donutChartDraw(sales_brand_donut_canvas2, sales_brand_donut_data2);
 }
 
 
@@ -746,7 +751,7 @@ function setDonutChartData(data)
 	}
 	
 	// -----------------------------------------------------------------------------------------
-	// Sales Work 
+	// Sales Work
 	// -----------------------------------------------------------------------------------------
 	else if(data == "sales_work") {
 		<c:forEach items="${salesReport_work}" var="row">
@@ -784,7 +789,23 @@ function setDonutChartData(data)
 		</c:forEach>
 	}
 	
-		
+	// -----------------------------------------------------------------------------------------
+	// Sales Brand 2
+	// -----------------------------------------------------------------------------------------
+	else if(data == "sales_brand2") {
+		<c:forEach items="${salesReport_brand}" var="row">
+			<c:choose>
+				<c:when test="${row.brand_id ne 'kakao'}">
+					var json = new Object();
+					json.name = "${row.brand_nm}";
+					json.sales = ${row.sales_1} + ${row.sales_2} + ${row.sales_3} + ${row.sales_4} + ${row.sales_5} + ${row.sales_6}
+								 + ${row.sales_7} + ${row.sales_8} + ${row.sales_9} + ${row.sales_10} + ${row.sales_11} + ${row.sales_12};
+					tmp_arr.push(json);
+				</c:when>
+			</c:choose>
+		</c:forEach>
+	}
+
 	// -----------------------------------------------------------------------------------------
 	// Chart Data Setting 
 	// -----------------------------------------------------------------------------------------
@@ -811,61 +832,59 @@ function setDonutChartData(data)
 function setAreaChartData(data)
 {
 	var tmp_arr = new Array();
-	var tmp_data = new Array();
-	var tmp_dataset = new Array();
-	var tmp_var;
 		
 	// -----------------------------------------------------------------------------------------
 	// Sales Report 
 	// -----------------------------------------------------------------------------------------
 	if(data == "sales_report") {
 		<c:forEach items="${salesReport}" var="row">
-			var json = new Object();
-			json.name = "${row.rep_nm}";
-			json.sales_1 = ${row.sales_1};
-			json.sales_2 = ${row.sales_2};
-			json.sales_3 = ${row.sales_3};
-			json.sales_4 = ${row.sales_4};
-			json.sales_5 = ${row.sales_5};
-			json.sales_6 = ${row.sales_6};
-			json.sales_7 = ${row.sales_7};
-			json.sales_8 = ${row.sales_8};
-			json.sales_9 = ${row.sales_9};
-			json.sales_10 = ${row.sales_10};
-			json.sales_11 = ${row.sales_11};
-			json.sales_12 = ${row.sales_12};
-			tmp_arr.push(json);
+			<c:choose>
+				<c:when test="${row.rep_id eq 'gross_margin'}">
+					var json = new Object();
+					json.name = "${row.rep_nm}";
+					json.sales_1 = ${row.sales_1};
+					json.sales_2 = ${row.sales_2};
+					json.sales_3 = ${row.sales_3};
+					json.sales_4 = ${row.sales_4};
+					json.sales_5 = ${row.sales_5};
+					json.sales_6 = ${row.sales_6};
+					json.sales_7 = ${row.sales_7};
+					json.sales_8 = ${row.sales_8};
+					json.sales_9 = ${row.sales_9};
+					json.sales_10 = ${row.sales_10};
+					json.sales_11 = ${row.sales_11};
+					json.sales_12 = ${row.sales_12};
+					tmp_arr.push(json);
+				</c:when>
+			</c:choose>
 		</c:forEach>
-
-		tmp_data = {
-				labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-				datasets: [
-					{
-						label: tmp_arr[3].name,
-						fillColor: "rgba(210, 214, 222, 1)",
-						strokeColor: "rgba(210, 214, 222, 1)",
-						pointColor: "rgba(210, 214, 222, 1)",
-						pointStrokeColor: "#c1c7d1",
-						pointHighlightFill: "#fff",
-						pointHighlightStroke: "rgba(220,220,220,1)",
-						data: [
-							tmp_arr[3].sales_1, 
-							tmp_arr[3].sales_2, 
-							tmp_arr[3].sales_3, 
-							tmp_arr[3].sales_4, 
-							tmp_arr[3].sales_5, 
-							tmp_arr[3].sales_6, 
-							tmp_arr[3].sales_7, 
-							tmp_arr[3].sales_8, 
-							tmp_arr[3].sales_9, 
-							tmp_arr[3].sales_10,
-							tmp_arr[3].sales_11,
-							tmp_arr[3].sales_12
-						]
-					}
-					
-				]
-		}
+	}
+	
+	// -----------------------------------------------------------------------------------------
+	// Sales Report 
+	// -----------------------------------------------------------------------------------------
+	else if(data == "sales_report2") {
+		<c:forEach items="${salesReport}" var="row">
+			<c:choose>
+				<c:when test="${row.rep_id eq 'business_profit_rate'}">
+					var json = new Object();
+					json.name = "${row.rep_nm}";
+					json.sales_1 = ${row.sales_1};
+					json.sales_2 = ${row.sales_2};
+					json.sales_3 = ${row.sales_3};
+					json.sales_4 = ${row.sales_4};
+					json.sales_5 = ${row.sales_5};
+					json.sales_6 = ${row.sales_6};
+					json.sales_7 = ${row.sales_7};
+					json.sales_8 = ${row.sales_8};
+					json.sales_9 = ${row.sales_9};
+					json.sales_10 = ${row.sales_10};
+					json.sales_11 = ${row.sales_11};
+					json.sales_12 = ${row.sales_12};
+					tmp_arr.push(json);
+				</c:when>
+			</c:choose>
+		</c:forEach>
 	}
 
 	// -----------------------------------------------------------------------------------------
@@ -889,110 +908,72 @@ function setAreaChartData(data)
 			json.sales_12 = ${row.sales_12};
 			tmp_arr.push(json);
 		</c:forEach>
-		
-		tmp_data = {
-			labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-			datasets: [
-				{
-					label: tmp_arr[0].name,
-					fillColor: "rgba(210, 214, 222, 1)",
-					strokeColor: "rgba(210, 214, 222, 1)",
-					pointColor: "rgba(210, 214, 222, 1)",
-					pointStrokeColor: "#c1c7d1",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [
-						tmp_arr[0].sales_1, 
-						tmp_arr[0].sales_2, 
-						tmp_arr[0].sales_3, 
-						tmp_arr[0].sales_4, 
-						tmp_arr[0].sales_5, 
-						tmp_arr[0].sales_6, 
-						tmp_arr[0].sales_7, 
-						tmp_arr[0].sales_8, 
-						tmp_arr[0].sales_9, 
-						tmp_arr[0].sales_10,
-						tmp_arr[0].sales_11,
-						tmp_arr[0].sales_12
-					]
-				},
-				{
-					label: tmp_arr[1].name,
-					fillColor: "rgba(60,141,188,0.9)",
-					strokeColor: "rgba(60,141,188,0.8)",
-					pointColor: "#3b8bba",
-					pointStrokeColor: "rgba(60,141,188,1)",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(60,141,188,1)",
-					data: [
-						tmp_arr[1].sales_1, 
-						tmp_arr[1].sales_2, 
-						tmp_arr[1].sales_3, 
-						tmp_arr[1].sales_4, 
-						tmp_arr[1].sales_5, 
-						tmp_arr[1].sales_6, 
-						tmp_arr[1].sales_7, 
-						tmp_arr[1].sales_8, 
-						tmp_arr[1].sales_9, 
-						tmp_arr[1].sales_10,
-						tmp_arr[1].sales_11,
-						tmp_arr[1].sales_12
-					]
-				},
-				{
-					label: tmp_arr[2].name,
-					fillColor: "rgba(243,156,18,0.9)",
-					strokeColor: "rgba(243,156,18,0.8)",
-					pointColor: "#f39c12",
-					pointStrokeColor: "rgba(243,156,18,1)",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(243,156,18,1)",
-					data: [
-						tmp_arr[2].sales_1, 
-						tmp_arr[2].sales_2, 
-						tmp_arr[2].sales_3, 
-						tmp_arr[2].sales_4, 
-						tmp_arr[2].sales_5, 
-						tmp_arr[2].sales_6, 
-						tmp_arr[2].sales_7, 
-						tmp_arr[2].sales_8, 
-						tmp_arr[2].sales_9, 
-						tmp_arr[2].sales_10,
-						tmp_arr[2].sales_11,
-						tmp_arr[2].sales_12
-					]
-				},
-				{
-					label: tmp_arr[3].name,
-					fillColor: "rgba(0,192,239,0.9)",
-					strokeColor: "rgba(0,192,239,0.8)",
-					pointColor: "#00c0ef",
-					pointStrokeColor: "rgba(0,192,239,1)",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(0,192,239,1)",
-					data: [
-						tmp_arr[3].sales_1, 
-						tmp_arr[3].sales_2, 
-						tmp_arr[3].sales_3, 
-						tmp_arr[3].sales_4, 
-						tmp_arr[3].sales_5, 
-						tmp_arr[3].sales_6, 
-						tmp_arr[3].sales_7, 
-						tmp_arr[3].sales_8, 
-						tmp_arr[3].sales_9, 
-						tmp_arr[3].sales_10,
-						tmp_arr[3].sales_11,
-						tmp_arr[3].sales_12
-					]
-				}
-			]
-		}
 	}
 	
+	// -----------------------------------------------------------------------------------------
+	// Perform Rate 
+	// -----------------------------------------------------------------------------------------
+	else if(data == "perform_rate") {
+		<c:forEach items="${performRate_list}" var="row">
+			var json = new Object();
+			json.name = "수금율";
+			json.sales_1 = ${row.sales_1};
+			json.sales_2 = ${row.sales_2};
+			json.sales_3 = ${row.sales_3};
+			json.sales_4 = ${row.sales_4};
+			json.sales_5 = ${row.sales_5};
+			json.sales_6 = ${row.sales_6};
+			json.sales_7 = ${row.sales_7};
+			json.sales_8 = ${row.sales_8};
+			json.sales_9 = ${row.sales_9};
+			json.sales_10 = ${row.sales_10};
+			json.sales_11 = ${row.sales_11};
+			json.sales_12 = ${row.sales_12};
+			tmp_arr.push(json);
+		</c:forEach>
+	}
 	
-	// -----------------------------------------------------------------------------------------
-	// Chart Data Setting 
-	// -----------------------------------------------------------------------------------------
+	return makeData_Area(tmp_arr);
+}
+
+
+/**
+ * Chart Data Setting
+ */
+function makeData_Area(tmp_arr) {
+	var tmp_data = new Array();
+	var tmp_dataset = new Array();
+	var tmp_var;
+
+	for(var i=0; i<tmp_arr.length; i++) {
+		tmp_var =
+			{
+				label: tmp_arr[i].name,
+				fillColor: chart_color[i],
+				strokeColor: chart_color[i],
+				pointColor: chart_color[i],
+				pointStrokeColor: chart_color[i],
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: chart_color[i],
+				data: [
+					tmp_arr[i].sales_1, 
+					tmp_arr[i].sales_2, 
+					tmp_arr[i].sales_3, 
+					tmp_arr[i].sales_4, 
+					tmp_arr[i].sales_5, 
+					tmp_arr[i].sales_6, 
+					tmp_arr[i].sales_7, 
+					tmp_arr[i].sales_8, 
+					tmp_arr[i].sales_9, 
+					tmp_arr[i].sales_10,
+					tmp_arr[i].sales_11,
+					tmp_arr[i].sales_12
+				]
+			};
+		tmp_dataset.push(tmp_var);
+	}
+	tmp_data.labels = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+	tmp_data.datasets = tmp_dataset;
 	
 	return tmp_data;
 }

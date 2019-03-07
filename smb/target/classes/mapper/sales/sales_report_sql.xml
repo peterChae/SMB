@@ -352,5 +352,32 @@
 		group by brand_id
 		        ,brand_nm
  	</select> 	
+
+
+ 	<!-- Perform Rate List -->
+ 	<select id="getPerformRate"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   max(case when amt_month = '01' then perform_rate else 0 end) sales_1
+		        ,max(case when amt_month = '02' then perform_rate else 0 end) sales_2
+		        ,max(case when amt_month = '03' then perform_rate else 0 end) sales_3
+		        ,max(case when amt_month = '04' then perform_rate else 0 end) sales_4
+		        ,max(case when amt_month = '05' then perform_rate else 0 end) sales_5
+		        ,max(case when amt_month = '06' then perform_rate else 0 end) sales_6
+		        ,max(case when amt_month = '07' then perform_rate else 0 end) sales_7
+		        ,max(case when amt_month = '08' then perform_rate else 0 end) sales_8
+		        ,max(case when amt_month = '09' then perform_rate else 0 end) sales_9
+		        ,max(case when amt_month = '10' then perform_rate else 0 end) sales_10
+		        ,max(case when amt_month = '11' then perform_rate else 0 end) sales_11
+		        ,max(case when amt_month = '12' then perform_rate else 0 end) sales_12
+		from    (select   amt_year
+		                 ,amt_month
+		                 ,round(sum(perform_count) / sum(target_count), 4, 1) * 100 as perform_rate
+		         from     tb_smb_sales
+		         where    amt_year = #{amt_year}
+		         and      work_id = 'w0001'
+		         group by amt_year
+		                 ,amt_month
+		         ) A
+	</select>
+
  	 	
 </mapper>

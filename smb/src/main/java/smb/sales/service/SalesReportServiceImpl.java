@@ -61,4 +61,10 @@ public class SalesReportServiceImpl implements SalesReportService {
 	public List<DtoSalesReport> getSalesReport_Brand(String amt_year) throws Exception {
 		return salesReportDao.getSalesReport_Brand(amt_year);
 	}
+	
+	
+	@Override
+	public List<DtoSalesReport> getPerformRate(String amt_year) throws Exception {
+		return salesReportDao.getPerformRate(amt_year);
+	}
 }

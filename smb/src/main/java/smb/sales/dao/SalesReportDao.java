@@ -50,4 +50,9 @@ public class SalesReportDao extends AbstractDao  {
 	public List<DtoSalesReport> getSalesReport_Brand(String amt_year) throws Exception {
 		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport_Brand", amt_year);
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<DtoSalesReport> getPerformRate(String amt_year) throws Exception {
+		return (List<DtoSalesReport>)selectList("sales_report.getPerformRate", amt_year);
+	}
 }

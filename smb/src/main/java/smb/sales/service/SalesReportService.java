@@ -10,4 +10,6 @@ public interface SalesReportService {
 	public List<DtoSalesReport> getSalesReport_Work(String amt_year) throws Exception;
 	public List<DtoSalesReport> getSalesReport_Company(String amt_year) throws Exception;
 	public List<DtoSalesReport> getSalesReport_Brand(String amt_year) throws Exception;
+	
+	public List<DtoSalesReport> getPerformRate(String amt_year) throws Exception;
 }
