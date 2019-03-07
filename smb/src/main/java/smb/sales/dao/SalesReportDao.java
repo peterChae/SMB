@@ -14,6 +14,23 @@ public class SalesReportDao extends AbstractDao  {
 	
 	Logger log = LoggerFactory.getLogger(SalesReportDao.class);
 	
+	// --------------------------------------------------------------------
+	// Sales Report Process Dao
+	// --------------------------------------------------------------------
+	public Integer deleteSalesReportTempData(String amt_year) throws Exception {
+		return (Integer)delete("sales_report.deleteSalesReportTempData", amt_year);
+	}
+	public Integer insertSalesReportTempData(String amt_year) throws Exception {
+		return (Integer)insert("sales_report.insertSalesReportTempData", amt_year);
+	}
+	@SuppressWarnings("unchecked")
+	public List<DtoSalesReport> getSalesReport() throws Exception {
+		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport");
+	}
+	// --------------------------------------------------------------------
+	// --------------------------------------------------------------------
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<DtoSalesReport> getSalesReport_Cost(String amt_year) throws Exception {
 		return (List<DtoSalesReport>)selectList("sales_report.getSalesReport_Cost", amt_year);

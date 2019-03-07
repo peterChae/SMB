@@ -2,6 +2,122 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="sales_report">
+	<delete id="deleteSalesReportTempData" parameterType="String">
+		<![CDATA[
+		delete from tmp_sales_report
+		]]>		     
+	</delete>
+
+ 	<!-- Insert Sales Report Temp Data -->
+	<insert id="insertSalesReportTempData" parameterType="String">
+		<![CDATA[
+		insert into tmp_sales_report
+		select    a.amt_year
+		         ,a.amt_month
+				 ,net_sales_money
+				 ,cost_money
+				 ,cost_money2
+				 ,net_sales_money - cost_money as gross_margin
+				 ,net_sales_money - cost_money - cost_money2 as business_profit
+				 ,(net_sales_money - cost_money - cost_money2) / (net_sales_money - cost_money) as business_profit_rate
+		from      (select    amt_year
+		                    ,amt_month
+		                    ,sum(net_sales_money) as net_sales_money 
+		           from      tb_smb_sales
+		           where     amt_year = #{amt_year}
+		           group by  amt_year
+		                    ,amt_month
+		          ) A
+		         ,(select    amt_year
+		                    ,amt_month
+		                    ,sum(case when b.cost_cate_id = '01' then cost_money else 0 end) as cost_money
+							,sum(case when b.cost_cate_id <> '01' then cost_money else 0 end) as cost_money2
+		           from      tb_smb_cost_sales a
+				            ,tb_smb_cost b
+		           where     a.cost_id = b.cost_id
+				   and       a.amt_year = #{amt_year}
+		           group by  amt_year
+		                    ,amt_month
+		          ) B
+		where     a.amt_year = b.amt_year
+		and       a.amt_month = b.amt_month	
+		]]>		     
+	</insert>
+
+
+ 	<!-- Sales Report List -->
+ 	<select id="getSalesReport"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">
+		select   '1' as idx
+		        ,'net_sales_money' as rep_id
+		        ,'총매출' as rep_nm
+		        ,sum(case when amt_month = '01' then net_sales_money else 0 end) sales_1
+		        ,sum(case when amt_month = '02' then net_sales_money else 0 end) sales_2
+		        ,sum(case when amt_month = '03' then net_sales_money else 0 end) sales_3
+		        ,sum(case when amt_month = '04' then net_sales_money else 0 end) sales_4
+		        ,sum(case when amt_month = '05' then net_sales_money else 0 end) sales_5
+		        ,sum(case when amt_month = '06' then net_sales_money else 0 end) sales_6
+		        ,sum(case when amt_month = '07' then net_sales_money else 0 end) sales_7
+		        ,sum(case when amt_month = '08' then net_sales_money else 0 end) sales_8
+		        ,sum(case when amt_month = '09' then net_sales_money else 0 end) sales_9
+		        ,sum(case when amt_month = '10' then net_sales_money else 0 end) sales_10
+		        ,sum(case when amt_month = '11' then net_sales_money else 0 end) sales_11
+		        ,sum(case when amt_month = '12' then net_sales_money else 0 end) sales_12
+		from    tmp_sales_report
+		union
+		select   '2' as idx
+		        ,'gross_margin' as rep_id
+		        ,'매출총이익' as rep_nm
+		        ,sum(case when amt_month = '01' then gross_margin else 0 end) sales_1
+		        ,sum(case when amt_month = '02' then gross_margin else 0 end) sales_2
+		        ,sum(case when amt_month = '03' then gross_margin else 0 end) sales_3
+		        ,sum(case when amt_month = '04' then gross_margin else 0 end) sales_4
+		        ,sum(case when amt_month = '05' then gross_margin else 0 end) sales_5
+		        ,sum(case when amt_month = '06' then gross_margin else 0 end) sales_6
+		        ,sum(case when amt_month = '07' then gross_margin else 0 end) sales_7
+		        ,sum(case when amt_month = '08' then gross_margin else 0 end) sales_8
+		        ,sum(case when amt_month = '09' then gross_margin else 0 end) sales_9
+		        ,sum(case when amt_month = '10' then gross_margin else 0 end) sales_10
+		        ,sum(case when amt_month = '11' then gross_margin else 0 end) sales_11
+		        ,sum(case when amt_month = '12' then gross_margin else 0 end) sales_12
+		from    tmp_sales_report
+		union
+		select   '3' as idx
+		        ,'business_profit' as rep_id
+		        ,'영업이익' as rep_nm
+		        ,sum(case when amt_month = '01' then business_profit else 0 end) sales_1
+		        ,sum(case when amt_month = '02' then business_profit else 0 end) sales_2
+		        ,sum(case when amt_month = '03' then business_profit else 0 end) sales_3
+		        ,sum(case when amt_month = '04' then business_profit else 0 end) sales_4
+		        ,sum(case when amt_month = '05' then business_profit else 0 end) sales_5
+		        ,sum(case when amt_month = '06' then business_profit else 0 end) sales_6
+		        ,sum(case when amt_month = '07' then business_profit else 0 end) sales_7
+		        ,sum(case when amt_month = '08' then business_profit else 0 end) sales_8
+		        ,sum(case when amt_month = '09' then business_profit else 0 end) sales_9
+		        ,sum(case when amt_month = '10' then business_profit else 0 end) sales_10
+		        ,sum(case when amt_month = '11' then business_profit else 0 end) sales_11
+		        ,sum(case when amt_month = '12' then business_profit else 0 end) sales_12
+		from    tmp_sales_report
+		union
+		select   '4' as idx
+		        ,'business_profit_rate' as rep_id
+		        ,'영업이익률' as rep_nm
+		        ,sum(case when amt_month = '01' then business_profit_rate else 0 end) sales_1
+		        ,sum(case when amt_month = '02' then business_profit_rate else 0 end) sales_2
+		        ,sum(case when amt_month = '03' then business_profit_rate else 0 end) sales_3
+		        ,sum(case when amt_month = '04' then business_profit_rate else 0 end) sales_4
+		        ,sum(case when amt_month = '05' then business_profit_rate else 0 end) sales_5
+		        ,sum(case when amt_month = '06' then business_profit_rate else 0 end) sales_6
+		        ,sum(case when amt_month = '07' then business_profit_rate else 0 end) sales_7
+		        ,sum(case when amt_month = '08' then business_profit_rate else 0 end) sales_8
+		        ,sum(case when amt_month = '09' then business_profit_rate else 0 end) sales_9
+		        ,sum(case when amt_month = '10' then business_profit_rate else 0 end) sales_10
+		        ,sum(case when amt_month = '11' then business_profit_rate else 0 end) sales_11
+		        ,sum(case when amt_month = '12' then business_profit_rate else 0 end) sales_12
+		from    tmp_sales_report
+ 	</select>
+
+
+
 
  	<!-- Sales Company List -->
  	<select id="getSalesReport_Cost"  resultType="smb.sales.dto.DtoSalesReport" parameterType="String">

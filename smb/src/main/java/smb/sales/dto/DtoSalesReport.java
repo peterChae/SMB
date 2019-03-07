@@ -1,9 +1,9 @@
 package smb.sales.dto;
 
-import java.math.BigDecimal;
-
 public class DtoSalesReport {
 	private String		idx;
+	private String		rep_id;
+	private String		rep_nm;
 	private String		work_id;
 	private String		work_nm;
 	private String		cmpy_id;
@@ -15,19 +15,31 @@ public class DtoSalesReport {
 	private String		amt_year;
 	private String		amt_month;
 	private String		amt_term;
-	private BigDecimal  sales_1;
-	private BigDecimal  sales_2;
-	private BigDecimal  sales_3;
-	private BigDecimal  sales_4;
-	private BigDecimal  sales_5;
-	private BigDecimal  sales_6;
-	private BigDecimal  sales_7;
-	private BigDecimal  sales_8;
-	private BigDecimal  sales_9;
-	private BigDecimal  sales_10;
-	private BigDecimal  sales_11;
-	private BigDecimal  sales_12;	
+	private double		sales_1;
+	private double		sales_2;
+	private double		sales_3;
+	private double		sales_4;
+	private double		sales_5;
+	private double		sales_6;
+	private double		sales_7;
+	private double		sales_8;
+	private double		sales_9;
+	private double		sales_10;
+	private double		sales_11;
+	private double		sales_12;
 	
+	public String getRep_id() {
+		return rep_id;
+	}
+	public void setRep_id(String rep_id) {
+		this.rep_id = rep_id;
+	}
+	public String getRep_nm() {
+		return rep_nm;
+	}
+	public void setRep_nm(String rep_nm) {
+		this.rep_nm = rep_nm;
+	}
 	public String getIdx() {
 		return idx;
 	}
@@ -100,76 +112,76 @@ public class DtoSalesReport {
 	public void setAmt_month(String amt_month) {
 		this.amt_month = amt_month;
 	}
-	public BigDecimal getSales_1() {
-		return sales_1.setScale(0);
+	public double getSales_1() {
+		return sales_1;
 	}
-	public void setSales_1(BigDecimal sales_1) {
+	public void setSales_1(double sales_1) {
 		this.sales_1 = sales_1;
 	}
-	public BigDecimal getSales_2() {
-		return sales_2.setScale(0);
+	public double getSales_2() {
+		return sales_2;
 	}
-	public void setSales_2(BigDecimal sales_2) {
+	public void setSales_2(double sales_2) {
 		this.sales_2 = sales_2;
 	}
-	public BigDecimal getSales_3() {
-		return sales_3.setScale(0);
+	public double getSales_3() {
+		return sales_3;
 	}
-	public void setSales_3(BigDecimal sales_3) {
+	public void setSales_3(double sales_3) {
 		this.sales_3 = sales_3;
 	}
-	public BigDecimal getSales_4() {
-		return sales_4.setScale(0);
+	public double getSales_4() {
+		return sales_4;
 	}
-	public void setSales_4(BigDecimal sales_4) {
+	public void setSales_4(double sales_4) {
 		this.sales_4 = sales_4;
 	}
-	public BigDecimal getSales_5() {
-		return sales_5.setScale(0);
+	public double getSales_5() {
+		return sales_5;
 	}
-	public void setSales_5(BigDecimal sales_5) {
+	public void setSales_5(double sales_5) {
 		this.sales_5 = sales_5;
 	}
-	public BigDecimal getSales_6() {
-		return sales_6.setScale(0);
+	public double getSales_6() {
+		return sales_6;
 	}
-	public void setSales_6(BigDecimal sales_6) {
+	public void setSales_6(double sales_6) {
 		this.sales_6 = sales_6;
 	}
-	public BigDecimal getSales_7() {
-		return sales_7.setScale(0);
+	public double getSales_7() {
+		return sales_7;
 	}
-	public void setSales_7(BigDecimal sales_7) {
+	public void setSales_7(double sales_7) {
 		this.sales_7 = sales_7;
 	}
-	public BigDecimal getSales_8() {
-		return sales_8.setScale(0);
+	public double getSales_8() {
+		return sales_8;
 	}
-	public void setSales_8(BigDecimal sales_8) {
+	public void setSales_8(double sales_8) {
 		this.sales_8 = sales_8;
 	}
-	public BigDecimal getSales_9() {
-		return sales_9.setScale(0);
+	public double getSales_9() {
+		return sales_9;
 	}
-	public void setSales_9(BigDecimal sales_9) {
+	public void setSales_9(double sales_9) {
 		this.sales_9 = sales_9;
 	}
-	public BigDecimal getSales_10() {
-		return sales_10.setScale(0);
+	public double getSales_10() {
+		return sales_10;
 	}
-	public void setSales_10(BigDecimal sales_10) {
+	public void setSales_10(double sales_10) {
 		this.sales_10 = sales_10;
 	}
-	public BigDecimal getSales_11() {
-		return sales_11.setScale(0);
+	public double getSales_11() {
+		return sales_11;
 	}
-	public void setSales_11(BigDecimal sales_11) {
+	public void setSales_11(double sales_11) {
 		this.sales_11 = sales_11;
 	}
-	public BigDecimal getSales_12() {
-		return sales_12.setScale(0);
+	public double getSales_12() {
+		return sales_12;
 	}
-	public void setSales_12(BigDecimal sales_12) {
+	public void setSales_12(double sales_12) {
 		this.sales_12 = sales_12;
 	}
 }

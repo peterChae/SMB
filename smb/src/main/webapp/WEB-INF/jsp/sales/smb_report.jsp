@@ -34,25 +34,6 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-<%@ include file="../common/header.jsp" %>
-<%@ include file="../common/menu.jsp" %>
-
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-
-	<section class="content-header">
-		<h1>
-			세일즈리포트 
-			<small>통계</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">매출관리</a></li>
-			<li class="active">세일즈리포트</li>
-		</ol>
-	</section>
 
 	<!-- Main content -->	
 	<section class="content">
@@ -616,10 +597,6 @@
 							</section>
 						</div>	
 					</div>
-					
-					<div align="right" class="box-footer">
-                		<button type="submit" id="fmBtnSalesInsert" class="btn bg-maroon margin">조회화면</button>
-              		</div>
               		<!-- /.box-footer -->
 				</div>
 				<!-- /.box -->
@@ -630,11 +607,6 @@
 		
 	</section>
 	<!-- /.content -->
-</div>
-<!-- /.Content Wrapper -->
-
-</div>
-<!-- /.Wrapper -->
 
 <!-- jQuery 2.2.3 -->
 <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -1106,11 +1078,6 @@ function lineChartDraw(canvas, data) {
 	lineChartOptions.datasetFill = false;
 	lineChart.Line(data, lineChartOptions);	
 }
-
-
-$('#fmBtnSalesInsert').click(function() {
-	window.location = "/smb/SalesList.do"
-});
 
 </script>
 

@@ -1,5 +1,7 @@
 package smb.sales.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import smb.sales.dto.DtoSalesReport;
 import smb.sales.service.SalesReportService;
 
 @Controller
@@ -31,6 +34,33 @@ public class SalesReportController {
 		// Return Object Data Setting
 		// -----------------------------------------------------------------------------
 		mv.addObject("amt_year", amt_year);
+		mv.addObject("salesReport", salesReportService.getSalesReport(amt_year));
+		mv.addObject("salesReport_cost", salesReportService.getSalesReport_Cost(amt_year));
+		mv.addObject("salesReport_work", salesReportService.getSalesReport_Work(amt_year));
+		mv.addObject("salesReport_company", salesReportService.getSalesReport_Company(amt_year));
+		mv.addObject("salesReport_brand", salesReportService.getSalesReport_Brand(amt_year));
+		
+		// -----------------------------------------------------------------------------
+		// Return 
+		// -----------------------------------------------------------------------------
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/SmbReport.do", method = RequestMethod.GET)
+	public ModelAndView SmbReport() throws Exception {
+		// -----------------------------------------------------------------------------
+		// New Return Object
+		// -----------------------------------------------------------------------------
+		ModelAndView mv = new ModelAndView("/sales/smb_report");
+		
+		// -----------------------------------------------------------------------------
+		// Return Object Data Setting
+		// -----------------------------------------------------------------------------
+		String amt_year = "2019";
+		
+		mv.addObject("amt_year", amt_year);
+		mv.addObject("salesReport", salesReportService.getSalesReport(amt_year));
 		mv.addObject("salesReport_cost", salesReportService.getSalesReport_Cost(amt_year));
 		mv.addObject("salesReport_work", salesReportService.getSalesReport_Work(amt_year));
 		mv.addObject("salesReport_company", salesReportService.getSalesReport_Company(amt_year));

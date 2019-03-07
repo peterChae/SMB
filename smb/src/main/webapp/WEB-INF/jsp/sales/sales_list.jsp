@@ -92,7 +92,8 @@
 
 					<div align="right" class="box-footer">
                 		<button type="submit" id="fmBtnSalesReport" class="btn btn-primary">세일즈 리포트</button>
-                		<button type="submit" id="fmBtnSalesInsert" class="btn bg-maroon margin">등록화면</button>
+                		<button type="submit" id="fmBtnCostSalesList" class="btn btn-primary">비용 리스트</button>
+              		    <button type="submit" id="fmBtnSalesInsert" class="btn bg-maroon margin">매출등록</button>
               		</div>
               		<!-- /.box-footer -->
 				</div>
@@ -128,6 +129,7 @@ $(function () {
 });
 
 $('#fmBtnSalesReport').click(function() {window.location = "/smb/SalesReport.do?amt_year=2019";});
+$('#fmBtnCostSalesList').click(function() {window.location = "/smb/CostSalesList.do"});  
 $('#fmBtnSalesInsert').click(function() {window.location = "/smb/SalesInsertForm.do"});  
 
 
