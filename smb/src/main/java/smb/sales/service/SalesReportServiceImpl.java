@@ -39,7 +39,16 @@ public class SalesReportServiceImpl implements SalesReportService {
 		// --------------------------------------------------------------------
 		// 3. Select Sales Report
 		// --------------------------------------------------------------------
-		return salesReportDao.getSalesReport();
+		List<DtoSalesReport> list = salesReportDao.getSalesReport();
+		
+		// --------------------------------------------------------------------
+		// 4. Delete Temp Table Data
+		// --------------------------------------------------------------------
+		if(salesReportDao.deleteSalesReportTempData(amt_year) < 0) {
+			log.debug("Sales Report Temp Data Delete Error");
+		}
+
+		return list;
 	}
 
 	@Override

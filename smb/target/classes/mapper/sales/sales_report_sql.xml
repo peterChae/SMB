@@ -23,7 +23,7 @@
 		from      (select    amt_year
 		                    ,amt_month
 		                    ,sum(net_sales_money) as net_sales_money 
-		           from      tb_smb_sales
+		           from      tb_smb_sales with(nolock)
 		           where     amt_year = #{amt_year}
 		           group by  amt_year
 		                    ,amt_month
@@ -32,8 +32,8 @@
 		                    ,amt_month
 		                    ,sum(case when b.cost_cate_id = '01' then cost_money else 0 end) as cost_money
 							,sum(case when b.cost_cate_id <> '01' then cost_money else 0 end) as cost_money2
-		           from      tb_smb_cost_sales a
-				            ,tb_smb_cost b
+		           from      tb_smb_cost_sales a with(nolock)
+				            ,tb_smb_cost b with(nolock)
 		           where     a.cost_id = b.cost_id
 				   and       a.amt_year = #{amt_year}
 		           group by  amt_year
@@ -62,7 +62,7 @@
 		        ,sum(case when amt_month = '10' then net_sales_money else 0 end) sales_10
 		        ,sum(case when amt_month = '11' then net_sales_money else 0 end) sales_11
 		        ,sum(case when amt_month = '12' then net_sales_money else 0 end) sales_12
-		from    tmp_sales_report
+		from    tmp_sales_report with(nolock)
 		union
 		select   '2' as idx
 		        ,'gross_margin' as rep_id
@@ -79,7 +79,7 @@
 		        ,sum(case when amt_month = '10' then gross_margin else 0 end) sales_10
 		        ,sum(case when amt_month = '11' then gross_margin else 0 end) sales_11
 		        ,sum(case when amt_month = '12' then gross_margin else 0 end) sales_12
-		from    tmp_sales_report
+		from    tmp_sales_report with(nolock)
 		union
 		select   '3' as idx
 		        ,'business_profit' as rep_id
@@ -96,7 +96,7 @@
 		        ,sum(case when amt_month = '10' then business_profit else 0 end) sales_10
 		        ,sum(case when amt_month = '11' then business_profit else 0 end) sales_11
 		        ,sum(case when amt_month = '12' then business_profit else 0 end) sales_12
-		from    tmp_sales_report
+		from    tmp_sales_report with(nolock)
 		union
 		select   '4' as idx
 		        ,'business_profit_rate' as rep_id
@@ -113,7 +113,7 @@
 		        ,sum(case when amt_month = '10' then business_profit_rate else 0 end) sales_10
 		        ,sum(case when amt_month = '11' then business_profit_rate else 0 end) sales_11
 		        ,sum(case when amt_month = '12' then business_profit_rate else 0 end) sales_12
-		from    tmp_sales_report
+		from    tmp_sales_report with(nolock)
  	</select>
 
 
@@ -139,7 +139,7 @@
 		from    (select   amt_year
 		                 ,amt_month
 		                 ,sum(cost_money) as cost_money
-		         from     tb_smb_cost_sales
+		         from     tb_smb_cost_sales with(nolock)
 		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
@@ -166,8 +166,8 @@
 		                 ,amt_year
 		                 ,amt_month
 		                 ,sum(cost_money) as cost_money
-		         from     tb_smb_cost_sales a
-		                 ,tb_smb_cost b
+		         from     tb_smb_cost_sales a with(nolock)
+		                 ,tb_smb_cost b with(nolock)
 		         where    a.cost_id = b.cost_id
 		         and      a.amt_year = #{amt_year}
 		         group by b.cost_id
@@ -200,7 +200,7 @@
 		from    (select   amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales
+		         from     tb_smb_sales with(nolock)
 		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
@@ -225,8 +225,8 @@
 		                 ,amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales a
-		                 ,tb_smb_work b
+		         from     tb_smb_sales a with(nolock)
+		                 ,tb_smb_work b with(nolock)
 		         where    a.work_id = b.work_id
 		         and      a.amt_year = #{amt_year}
 		         group by b.work_id
@@ -258,7 +258,7 @@
 		from    (select   amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales
+		         from     tb_smb_sales with(nolock)
 		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
@@ -283,8 +283,8 @@
 		                 ,amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales a
-		                 ,tb_smb_company b
+		         from     tb_smb_sales a with(nolock)
+		                 ,tb_smb_company b with(nolock)
 		         where    a.cmpy_id = b.cmpy_id
 		         and      a.amt_year = #{amt_year}
 		         group by b.cmpy_id
@@ -315,7 +315,7 @@
 		from    (select   amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales
+		         from     tb_smb_sales with(nolock)
 		         where    amt_year = #{amt_year}
 		         group by amt_year
 		                 ,amt_month
@@ -340,8 +340,8 @@
 		                 ,amt_year
 		                 ,amt_month
 		                 ,sum(net_sales_money) as net_sales_money
-		         from     tb_smb_sales a
-		                 ,tb_smb_brand b
+		         from     tb_smb_sales a with(nolock)
+		                 ,tb_smb_brand b with(nolock)
 		         where    a.brand_id = b.brand_id
 		         and      a.amt_year = #{amt_year}
 		         group by b.brand_id
@@ -371,7 +371,7 @@
 		from    (select   amt_year
 		                 ,amt_month
 		                 ,round(sum(perform_count) / sum(target_count), 4, 1) * 100 as perform_rate
-		         from     tb_smb_sales
+		         from     tb_smb_sales with(nolock)
 		         where    amt_year = #{amt_year}
 		         and      work_id = 'w0001'
 		         group by amt_year
