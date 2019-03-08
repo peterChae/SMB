@@ -821,6 +821,24 @@ function setDonutChartData(data)
 	// Sales Brand 2
 	// -----------------------------------------------------------------------------------------
 	else if(data == "sales_brand2") {
+		
+		// 전체 합계 금액 구하기
+		var total_value = 0;
+		<c:forEach items="${salesReport_brand}" var="row">
+			<c:choose>
+				<c:when test="${row.brand_id ne 'total' && row.brand_id ne 'kakao'}">
+					total_value += ${row.sales_1} + ${row.sales_2} + ${row.sales_3} + ${row.sales_4} + ${row.sales_5} + ${row.sales_6}
+								 + ${row.sales_7} + ${row.sales_8} + ${row.sales_9} + ${row.sales_10} + ${row.sales_11} + ${row.sales_12};
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		
+		var json_total = new Object();
+		json_total.name = "합계";
+		json_total.sales = total_value;
+		tmp_arr.push(json_total);
+		
+		// 합계를 제외한 나머지 데이터 누적
 		<c:forEach items="${salesReport_brand}" var="row">
 			<c:choose>
 				<c:when test="${row.brand_id ne 'kakao'}">
