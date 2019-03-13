@@ -1,4 +1,4 @@
-<%@page import="smb.common.dto.DtoBranch"%>
+<%@page import="smb.gis.dto.DtoBranch"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>

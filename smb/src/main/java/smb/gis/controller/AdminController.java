@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import smb.common.dto.DtoBranch;
-import smb.common.dto.DtoDeliveryStore;
-import smb.common.dto.DtoMatchingList;
 import smb.common.util.KaKaoAddrConvert;
+import smb.gis.dto.DtoBranch;
+import smb.gis.dto.DtoDeliveryStore;
+import smb.gis.dto.DtoMatchingList;
 import smb.gis.service.GisService;
 
 

@@ -4,7 +4,7 @@
 <mapper namespace="gis">
 
 	<!-- User Info -->
-	<select id="userInfo" resultType="smb.common.dto.DtoUser">
+	<select id="userInfo" resultType="smb.gis.dto.DtoUser">
 		select Login_ID, Login_PW
 		from TEST_LOGIN
 		<!-- where Login_ID = #{id} and Login_PW = #{pw} -->
@@ -25,7 +25,7 @@
  		and    BRAND_NAME = #{brand} 	
  	</select>
  	
- 	<select id="getDeliveryStoreList"  resultType="smb.common.dto.DtoDeliveryStore">
+ 	<select id="getDeliveryStoreList"  resultType="smb.gis.dto.DtoDeliveryStore">
  		select   STORE_ID
 		        ,isnull(STORE_NAME, 0) as STORE_NAME
 		        ,isnull(FULL_ADDR, 0) as FULL_ADDR
@@ -40,7 +40,7 @@
 		order by STORE_ID
  	</select>
  	
- 	<select id="getBranchList" resultType="smb.common.dto.DtoBranch" parameterType="String">
+ 	<select id="getBranchList" resultType="smb.gis.dto.DtoBranch" parameterType="String">
  		select   BRAND_NAME
  		        ,BRANCH_ID
  		        ,BRANCH_NAME
@@ -53,7 +53,7 @@
  		order by BRANCH_ID
  	</select>
  	
- 	<select id="getMatchingList" resultType="smb.common.dto.DtoMatchingList" parameterType="HashMap">
+ 	<select id="getMatchingList" resultType="smb.gis.dto.DtoMatchingList" parameterType="HashMap">
 		<![CDATA[
 		select   A.BRANCH_ID             
 		        ,A.BRANCH_NAME           
@@ -68,7 +68,7 @@
 		]]>		     
 	</select>
  	
- 	<select id="getUnMatchingList" resultType="smb.common.dto.DtoMatchingList" parameterType="HashMap">
+ 	<select id="getUnMatchingList" resultType="smb.gis.dto.DtoMatchingList" parameterType="HashMap">
 		<![CDATA[
 		select  A.BRANCH_ID           
 		       ,A.BRANCH_NAME         
@@ -110,7 +110,7 @@
 		]]>		     
 	</select>
 	
-	<select id="getAreaCountList" resultType="smb.common.dto.DtoDeliveryStore">
+	<select id="getAreaCountList" resultType="smb.gis.dto.DtoDeliveryStore">
 		select   SI
 		        ,count(*) as COUNT
 		from     TB_DELIVERYSTORE
@@ -118,7 +118,7 @@
 		group by SI
  	</select>
 
-	<select id="getTargetBranchList" resultType="smb.common.dto.DtoBranch" parameterType="String">
+	<select id="getTargetBranchList" resultType="smb.gis.dto.DtoBranch" parameterType="String">
 		select  BRAND_NAME         
 		       ,BRANCH_NAME         
 		       ,FULL_ADDR           
@@ -126,7 +126,7 @@
 		where   BRAND_NAME = #{brand}
 	</select>
 
-	<insert id="insertBranchConvertAddr" parameterType="smb.common.dto.DtoBranch">
+	<insert id="insertBranchConvertAddr" parameterType="smb.gis.dto.DtoBranch">
 		insert into TB_BRANCH_CONVERT (
 		            BRAND_NAME
 		           ,BRANCH_NAME
@@ -150,7 +150,7 @@
 		)
 	</insert>
 
-	<insert id="insertMatchingData" parameterType="smb.common.dto.DtoMatchingList">
+	<insert id="insertMatchingData" parameterType="smb.gis.dto.DtoMatchingList">
 		insert into TB_MATCHING_LIST (
 		            BRAND_NAME
 		           ,BRANCH_ID

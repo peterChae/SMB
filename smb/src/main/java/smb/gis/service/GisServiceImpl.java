@@ -8,11 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import smb.common.dao.GisDao;
-import smb.common.dto.DtoBranch;
-import smb.common.dto.DtoDeliveryStore;
-import smb.common.dto.DtoMatchingList;
-import smb.common.dto.DtoUser;
+import smb.gis.dao.GisDao;
+import smb.gis.dto.DtoBranch;
+import smb.gis.dto.DtoDeliveryStore;
+import smb.gis.dto.DtoMatchingList;
+import smb.gis.dto.DtoUser;
 
 @Service("gisService")
 public class GisServiceImpl implements GisService

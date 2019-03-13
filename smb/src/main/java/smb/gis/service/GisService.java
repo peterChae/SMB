@@ -2,10 +2,10 @@ package smb.gis.service;
 
 import java.util.List;
 
-import smb.common.dto.DtoBranch;
-import smb.common.dto.DtoDeliveryStore;
-import smb.common.dto.DtoMatchingList;
-import smb.common.dto.DtoUser;
+import smb.gis.dto.DtoBranch;
+import smb.gis.dto.DtoDeliveryStore;
+import smb.gis.dto.DtoMatchingList;
+import smb.gis.dto.DtoUser;
 
 public interface GisService {
 	

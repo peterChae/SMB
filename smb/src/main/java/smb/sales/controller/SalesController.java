@@ -7,6 +7,10 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,34 +33,7 @@ public class SalesController {
 	private SalesService salesService;
 	
 	
-	@RequestMapping(value = "/sampleController.do", method = RequestMethod.GET)
-	public ModelAndView sampleController() throws Exception {
-		// -----------------------------------------------------------------------------
-		// Base Type
-		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("sample");
-		mv.addObject("return_obj", new String("test"));
-		return mv;
-		
-		// -----------------------------------------------------------------------------
-		// Base Type - Parameter Request
-		// -----------------------------------------------------------------------------
-		
-		// 1. 
-		// @RequestParam("work_id") String work_id,
-		// @RequestParam("cmpy_id") String cmpy_id, ...
-		
-		// 2. 
-		// HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		// request.getRequestParam("work_id");
-		
-		// 3. 
-		// @ModelAttribute DtoSales dto_sales
-
-	}
-	
-	
-	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/SalesList.do", method = RequestMethod.GET)
 	public ModelAndView SalesList() throws Exception {
 		// -----------------------------------------------------------------------------
@@ -68,6 +45,19 @@ public class SalesController {
 		// Return Object Data Setting
 		// -----------------------------------------------------------------------------
 		mv.addObject("salesList", salesService.getSalesList());
+
+		
+		
+//		// 첫번째 방법 
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+//		log.info(auth.toString()); 
+//		
+//		// 두번째 방법 
+//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+//		log.info(user.getUsername()); 
+		
+		// 세번째 방법 
+		//log.info(principal.toString());
 
 		// -----------------------------------------------------------------------------
 		// Return 
