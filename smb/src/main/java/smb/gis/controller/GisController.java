@@ -58,7 +58,7 @@ public class GisController {
 		// New Return Object
 		// -----------------------------------------------------------------------------
 		ModelAndView mv = new ModelAndView("gis/gis_main");
-		String brand = "QUIZNOS";
+		String brand = "QUIZNOS"; 
 		
 		// -----------------------------------------------------------------------------
 		// Return Object Data Setting
