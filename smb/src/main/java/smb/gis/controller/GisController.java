@@ -63,7 +63,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// Return Object Data Setting
 		// -----------------------------------------------------------------------------
-		mv.addObject("brand", brand);
+		mv.addObject("brand", brand); 
 		mv.addObject("deliveryCount", gisService.getDeliveryCount());
 		mv.addObject("branchCount", gisService.getBranchCount(brand));
 
