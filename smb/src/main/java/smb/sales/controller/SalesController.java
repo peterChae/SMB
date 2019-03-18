@@ -7,10 +7,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +29,6 @@ public class SalesController {
 	private SalesService salesService;
 	
 	
-	@Secured("ROLE_USER")
 	@RequestMapping(value = "/SalesList.do", method = RequestMethod.GET)
 	public ModelAndView SalesList() throws Exception {
 		// -----------------------------------------------------------------------------
@@ -45,19 +40,6 @@ public class SalesController {
 		// Return Object Data Setting
 		// -----------------------------------------------------------------------------
 		mv.addObject("salesList", salesService.getSalesList());
-
-		
-		
-//		// 첫번째 방법 
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
-//		log.info(auth.toString()); 
-//		
-//		// 두번째 방법 
-//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-//		log.info(user.getUsername()); 
-		
-		// 세번째 방법 
-		//log.info(principal.toString());
 
 		// -----------------------------------------------------------------------------
 		// Return 

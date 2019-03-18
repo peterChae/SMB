@@ -16,19 +16,19 @@
 <body class="hold-transition login-page">
 <div class="login-box">
 	<div class="login-logo">
-		<a href="../../index2.html"><b>Admin</b> CNT Delivery</a>
+		<a href="#"><b>Admin</b> CNT Delivery</a>
 	</div>
 	<!-- /.login-logo -->
 	
 	<div class="login-box-body">
 		<p class="login-box-msg">Sign in to start your session</p>
-		<form id="frmLogin" action="j_spring_security_check" method="POST">
+		<form id="frmLogin" action="/smb/CheckLogin.do" method="POST">
 			<div class="form-group has-feedback">
-				<input type="text" id="user_id" class="form-control" placeholder="ID">
+				<input type="text" id="user_id" class="form-control" placeholder="ID" value="guest">
 				<span class="glyphicon glyphicon-pencil form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input type="password" id="user_pw" class="form-control" placeholder="Password">
+				<input type="password" id="user_pw" class="form-control" placeholder="Password" value="1">
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 			<div class="row">
@@ -41,6 +41,13 @@
 				</div>
 				<!-- /.col -->
 			</div>
+			
+			<c:url value="${msg}" />
+	        <c:if test="${not empty nickname}">
+	            <c:out value="${nickname}"/>´Ô ¹Ý°©½À´Ï´Ù.
+	            <a href="/logout">·Î±×¾Æ¿ô</a>
+	        </c:if>
+			
 		</form>
 	</div>
 	<!-- /.login-box-body -->

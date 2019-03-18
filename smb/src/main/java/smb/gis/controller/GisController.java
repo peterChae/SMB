@@ -32,68 +32,6 @@ public class GisController {
 	@Resource(name="gisService")
 	private GisService gisService;
 	
-	
-	@RequestMapping(value="/login.do", method = RequestMethod.GET)
-	public String onLogin() throws Exception {
-
-		return "login";
-	}
-	@RequestMapping(value="/excel_form.do", method = RequestMethod.GET)
-	public String excel_form() throws Exception {
-
-		return "excel_form";
-	}
-	@RequestMapping(value="/excel_insert.do", method = RequestMethod.GET)
-	public String excel_insert() throws Exception {
-
-		return "excel_insert";
-	}
-	
-	@RequestMapping(value="/setting.do", method = RequestMethod.GET)
-	public String setting() throws Exception {
-
-		return "setting";
-	}
-	
-	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
-	public String onLogout() throws Exception {
-
-		return "main";
-	}
-	
-	@RequestMapping(value="/goMain.do", method=RequestMethod.GET)
-	public String goMain(Model model, HttpServletRequest request) {
-		request.getAttribute("msg");
-		
-		model.addAttribute("msg",request.getAttribute("msg"));
-		
-		return "main";
-	}
-	
-	@RequestMapping(value="/confirmLogin.do", method = RequestMethod.GET)
-	public String confirmLogin(Model model, HttpServletRequest request) throws Exception {
-		
-		DtoUser dtoUser = gisService.getUserInfo();
-		String email = request.getParameter("email");
-		String pw = request.getParameter("pw");
-		
-		if(dtoUser.getLogin_ID().equals(email) && dtoUser.getLogin_PW().equals(pw)) {
-			model.addAttribute("msg","true");
-			//model.addAttribute("url","/smb/goMain.do");
-			return "main";
-		}
-		else {
-			model.addAttribute("msg", "none");
-			//model.addAttribute("url", "/smb/login.do");
-			return "login";
-		}
-	}
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/initGis.do", method = RequestMethod.GET)
 	public String initGis(@RequestParam("brand") String brand) throws Exception {
 		
@@ -111,7 +49,7 @@ public class GisController {
 		else if(brand.toLowerCase().equals("meagcoffee"))
 			return "redirect:MeagCoffee.do";
 		else
-			return "main";
+			return "gis/main";
 	}
 	
 	@RequestMapping(value = "/Quiznos.do", method = RequestMethod.GET)
@@ -119,7 +57,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/main");
+		ModelAndView mv = new ModelAndView("gis/gis_main");
 		String brand = "QUIZNOS";
 		
 		// -----------------------------------------------------------------------------
@@ -140,7 +78,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/main");
+		ModelAndView mv = new ModelAndView("gis/gis_main");
 		String brand = "MegaCoffee";
 		
 		// -----------------------------------------------------------------------------
@@ -162,7 +100,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/main");
+		ModelAndView mv = new ModelAndView("gis/gis_main");
 		String brand = "NORANG";
 		
 		// -----------------------------------------------------------------------------
@@ -184,7 +122,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/main");
+		ModelAndView mv = new ModelAndView("gis/gis_main");
 		String brand = "BurgerKing";
 		
 		// -----------------------------------------------------------------------------
@@ -205,7 +143,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("/main");
+		ModelAndView mv = new ModelAndView("gis/gis_main");
 		String brand = "DropTop";
 		
 		// -----------------------------------------------------------------------------
@@ -261,7 +199,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object 
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("pop_DeliveryStoreList");
+		ModelAndView mv = new ModelAndView("gis/pop_DeliveryStoreList");
 		List<DtoDeliveryStore> list_areaCount = gisService.getAreaCountList();
 		
 		// -----------------------------------------------------------------------------
@@ -284,7 +222,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object 
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("pop_MatchingList");
+		ModelAndView mv = new ModelAndView("gis/pop_MatchingList");
 		List<DtoMatchingList> list_matchingList = gisService.getMatchingList(distance, brand);
 		
 		// -----------------------------------------------------------------------------
@@ -305,7 +243,7 @@ public class GisController {
 		// -----------------------------------------------------------------------------
 		// New Return Object 
 		// -----------------------------------------------------------------------------
-		ModelAndView mv = new ModelAndView("pop_UnMatchingList");
+		ModelAndView mv = new ModelAndView("gis/pop_UnMatchingList");
 		List<DtoMatchingList> list_unMatchingList = gisService.getUnMatchingList(distance, brand);
 		
 		// -----------------------------------------------------------------------------

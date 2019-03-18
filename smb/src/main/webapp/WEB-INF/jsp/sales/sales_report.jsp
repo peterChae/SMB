@@ -3,41 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<title>CNTT | GIS-MATCHING SYSTEM</title>
-	
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/all-skins.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/morris/morris.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9a749ab366ad2be358f9cc9cc135906"></script>
-	
-	<style>
-		report_title {
-			font-weight: bold;
-			color: white;
-		}
-		total_title {
-			font-weight: bold;
-			color: black;
-		}
-	</style>
-	
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
+<!-- ----------------------------------------------- -->
+<!-- include Header -->
+<!-- ----------------------------------------------- -->
 <%@ include file="../common/header.jsp" %>
-<%@ include file="../common/menu.jsp" %>
+<!-- ----------------------------------------------- -->
+<!-- ----------------------------------------------- -->
+
+<style>
+	report_title {
+		font-weight: bold;
+		color: white;
+	}
+	total_title {
+		font-weight: bold;
+		color: black;
+	}
+</style>
 
 <!-- Content Wrapper -->
 <div class="content-wrapper">
@@ -607,18 +589,12 @@
 </div>
 <!-- /.Content Wrapper -->
 
-</div>
-<!-- /.Wrapper -->
-
-<!-- jQuery 2.2.3 -->
-<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<!-- ChartJS 1.0.1 -->
-<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
-
-<!-- Fast Click -->
-<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
+<!-- ----------------------------------------------- -->
+<!-- include Footer -->
+<!-- ----------------------------------------------- -->
+<%@ include file="../common/footer.jsp" %>
+<!-- ----------------------------------------------- -->
+<!-- ----------------------------------------------- -->
 
 <script>
 
